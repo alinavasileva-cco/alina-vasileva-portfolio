@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const facts = [
   { value: "×4,7", label: "оборот направления", note: "за 4 месяца" },
@@ -131,9 +131,153 @@ function CaseText({ task, approach, solution }: { task: string; approach: string
   );
 }
 
+function MotionBackdrop({ labels }: { labels: string[] }) {
+  return (
+    <div className="motion-backdrop" aria-hidden="true">
+      {labels.map((label, i) => (
+        <div className={`motion-panel panel-${i + 1}`} key={label} style={{ "--panel": i } as React.CSSProperties}>
+          <span>{label}</span>
+          <i><b /><b /><b /><b /></i>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function LearningCube({ active }: { active: number }) {
+  const cells = Array.from({ length: 9 });
+  return (
+    <div className="learning-cube-wrap" aria-hidden="true">
+      <div className="cube-caption"><span>ОБУЧЕНИЕ / 2009—2026</span><b>{String(active + 1).padStart(2, "0")}</b></div>
+      <div className="learning-cube" style={{ "--course": active } as React.CSSProperties}>
+        {["front", "right", "top"].map((face, faceIndex) => (
+          <div className={`cube-face cube-${face}`} key={face}>
+            {cells.map((_, cellIndex) => {
+              const course = faceIndex * 9 + cellIndex;
+              return <i className={course === active ? "lit" : ""} key={cellIndex}><span /></i>;
+            })}
+          </div>
+        ))}
+      </div>
+      <p>Наведи или нажми на программу</p>
+    </div>
+  );
+}
+
+function ScrollDataCore() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const pointCount = innerWidth < 700 ? 72 : 148;
+    const palette = [[245, 44, 133], [26, 204, 201], [255, 128, 32], [112, 205, 176], [126, 91, 220]];
+    let seed = 1847;
+    const random = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+    const points = Array.from({ length: pointCount }, (_, i) => {
+      const theta = random() * Math.PI * 2;
+      const phi = Math.acos(2 * random() - 1);
+      const radius = .58 + random() * .42;
+      return {
+        sx: Math.sin(phi) * Math.cos(theta) * radius,
+        sy: Math.cos(phi) * radius,
+        sz: Math.sin(phi) * Math.sin(theta) * radius,
+        cx: (random() * 2 - 1) * .82,
+        cy: (random() * 2 - 1) * .82,
+        cz: (random() * 2 - 1) * .82,
+        size: 1 + random() * 2.2,
+        group: i % 5,
+      };
+    });
+    let frame = 0;
+    let width = 0;
+    let height = 0;
+    let pointerX = 0;
+    let pointerY = 0;
+    const resize = () => {
+      const dpr = Math.min(devicePixelRatio || 1, 1.6);
+      width = innerWidth;
+      height = innerHeight;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    const onPointer = (event: PointerEvent) => {
+      pointerX = event.clientX / Math.max(width, 1) - .5;
+      pointerY = event.clientY / Math.max(height, 1) - .5;
+    };
+    const draw = (now: number) => {
+      const maxScroll = Math.max(document.documentElement.scrollHeight - height, 1);
+      const scroll = scrollY / maxScroll;
+      const morph = (Math.sin(scroll * Math.PI * 6 - Math.PI / 2) + 1) / 2;
+      const time = reduceMotion ? 0 : now * .00016;
+      const rotY = time + scroll * Math.PI * 4 + pointerX * .24;
+      const rotX = -.32 + Math.sin(scroll * Math.PI * 3) * .28 + pointerY * .16;
+      const cosY = Math.cos(rotY), sinY = Math.sin(rotY), cosX = Math.cos(rotX), sinX = Math.sin(rotX);
+      const base = Math.min(width, height) * (width < 700 ? .26 : .31);
+      const centerX = width * (width < 700 ? .68 : .7) + Math.sin(scroll * Math.PI * 5) * width * .17;
+      const centerY = height * .52 + Math.cos(scroll * Math.PI * 4) * height * .11;
+      context.clearRect(0, 0, width, height);
+      const projected = points.map((point) => {
+        const x0 = point.sx * (1 - morph) + point.cx * morph;
+        const y0 = point.sy * (1 - morph) + point.cy * morph;
+        const z0 = point.sz * (1 - morph) + point.cz * morph;
+        const x1 = x0 * cosY - z0 * sinY;
+        const z1 = x0 * sinY + z0 * cosY;
+        const y1 = y0 * cosX - z1 * sinX;
+        const z2 = y0 * sinX + z1 * cosX;
+        const depth = 2.7 / (3.5 + z2);
+        return { x: centerX + x1 * base * depth, y: centerY + y1 * base * depth, z: z2, depth, point };
+      });
+      context.lineWidth = .65;
+      for (let i = 0; i < projected.length; i++) {
+        const a = projected[i];
+        for (let j = i + 1; j < projected.length; j++) {
+          const b = projected[j];
+          if (a.point.group !== b.point.group) continue;
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          if (distance < base * .31) {
+            const color = palette[a.point.group];
+            context.strokeStyle = `rgba(${color[0]},${color[1]},${color[2]},${Math.max(0, .18 - distance / (base * 2.2))})`;
+            context.beginPath(); context.moveTo(a.x, a.y); context.lineTo(b.x, b.y); context.stroke();
+          }
+        }
+      }
+      projected.sort((a, b) => b.z - a.z).forEach(({ x, y, depth, point }) => {
+        const color = palette[point.group];
+        const glow = context.createRadialGradient(x, y, 0, x, y, point.size * 5 * depth);
+        glow.addColorStop(0, `rgba(${color[0]},${color[1]},${color[2]},${.76 * depth})`);
+        glow.addColorStop(.3, `rgba(${color[0]},${color[1]},${color[2]},${.38 * depth})`);
+        glow.addColorStop(1, `rgba(${color[0]},${color[1]},${color[2]},0)`);
+        context.fillStyle = glow;
+        context.beginPath(); context.arc(x, y, point.size * 5 * depth, 0, Math.PI * 2); context.fill();
+      });
+      frame = requestAnimationFrame(draw);
+    };
+    resize();
+    addEventListener("resize", resize);
+    addEventListener("pointermove", onPointer, { passive: true });
+    frame = requestAnimationFrame(draw);
+    return () => {
+      cancelAnimationFrame(frame);
+      removeEventListener("resize", resize);
+      removeEventListener("pointermove", onPointer);
+    };
+  }, []);
+
+  return <canvas className="scroll-data-core" ref={canvasRef} aria-hidden="true" />;
+}
+
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [activeCourse, setActiveCourse] = useState(0);
 
   useEffect(() => {
     const onScroll = () => {
@@ -150,6 +294,7 @@ export default function App() {
 
   return (
     <main>
+      <ScrollDataCore />
       <div className="progress" style={{ transform: `scaleX(${progress})` }} />
       <header>
         <a className="brand" href="#top">AV<span>/ CCO</span></a>
@@ -192,17 +337,17 @@ export default function App() {
 
         <article className="case commercial reveal">
           <div className="case-copy"><div className="case-no">КЕЙС 01 / 2026</div><p>Медиа Инсайт · коммерческий директор</p><h3>Коммерческое управление digital-направлением</h3><CaseText task="Сформировать управляемый коммерческий контур digital-направления: от привлечения и квалификации лида до запуска проекта." approach="Единый цикл продаж, пресейла и тендерной работы с контролем прогнозной выручки, маржинальности и следующих шагов в CRM." solution="Планы продаж по выручке и марже; подготовка и защита КП; управление пресейлом; переговоры на C-level; контроль экономики сделок и запуска проектов." /></div>
-          <div className="case-viz"><div className="viz-label">РЕЗУЛЬТАТ / 4 МЕСЯЦА</div><SalesFunnel /><div className="result-strip"><b>×4,7<span>оборот направления</span></b><b>×8,3<span>маржа направления</span></b></div></div>
+          <div className="case-viz"><MotionBackdrop labels={["69 ВСТРЕЧ", "40+ КП", "22,5%", "8 ЗАПУСКОВ", "2 ПОБЕДЫ"]} /><div className="viz-label">РЕЗУЛЬТАТ / 4 МЕСЯЦА</div><SalesFunnel /><div className="result-strip"><b>×4,7<span>оборот направления</span></b><b>×8,3<span>маржа направления</span></b></div></div>
         </article>
 
         <article className="case systems reveal">
           <div className="case-copy"><div className="case-no">КЕЙС 02 / 2023—2025</div><p>Интерэстейт / SETEVIE · исполнительный директор</p><h3>Систематизация операционного управления</h3><CaseText task="Обеспечить рост агентства и снизить зависимость ежедневной работы от участия собственника." approach="Управление продуктовой стратегией, бюджетами, P&L, топ-менеджментом и кросс-функциональными командами." solution="Внедрение Битрикс24, 1С, DataLens и AI; настройка процессов и управленческой отчётности; комплектование штата; KPI и OKR; управление тендерами и контрактами." /></div>
-          <div className="case-viz"><div className="viz-label">РЕЗУЛЬТАТ / 2,5 ГОДА</div><OperationsDashboard /><PuzzleSystem /></div>
+          <div className="case-viz"><MotionBackdrop labels={["+71%", "41 ПРОЕКТ", "P&L", "CRM", "5×"]} /><div className="viz-label">РЕЗУЛЬТАТ / 2,5 ГОДА</div><OperationsDashboard /><PuzzleSystem /></div>
         </article>
 
         <div className="case-pair">
-          <article className="compact-case reveal"><span>КЕЙС 03 / GARWIN / 2019—2022</span><h3>Маркетинг и PR федерального поставщика</h3><CaseText task="Управлять маркетингом и онлайн-продажами компании с ассортиментом более 100 000 SKU." approach="Многоканальные кампании, медиапланирование, бюджетирование и управление рекламой, PR и производством контента." solution="Сформирована команда; организовано производство контента; настроено управление кампаниями и контроль расходов." /><MarketingDashboard /></article>
-          <article className="compact-case reveal"><span>КЕЙС 04 / АЛЬЯНС / 2016—2019</span><h3>Развитие бизнеса и нового направления</h3><CaseText task="Создать стабильный поток клиентов и запустить новое направление юридической компании." approach="Стратегии привлечения, партнёрский маркетинг, корпоративные коммуникации и PR." solution="Партнёрства с Торгово-промышленной палатой, Центром помощи мигрантам и migranto.ru; запуск нового бизнес-юнита." /><GrowthDashboard /></article>
+          <article className="compact-case reveal"><MotionBackdrop labels={["×4 ТРАФИК", "×3 ЗАЯВКИ", "÷2 CPO", "×5 КОНТЕНТ"]} /><span>КЕЙС 03 / GARWIN / 2019—2022</span><h3>Маркетинг и PR федерального поставщика</h3><CaseText task="Управлять маркетингом и онлайн-продажами компании с ассортиментом более 100 000 SKU." approach="Многоканальные кампании, медиапланирование, бюджетирование и управление рекламой, PR и производством контента." solution="Сформирована команда; организовано производство контента; настроено управление кампаниями и контроль расходов." /><MarketingDashboard /></article>
+          <article className="compact-case reveal"><MotionBackdrop labels={["+86%", "40 ЛИДОВ", "+150%", "80% МАРЖА"]} /><span>КЕЙС 04 / АЛЬЯНС / 2016—2019</span><h3>Развитие бизнеса и нового направления</h3><CaseText task="Создать стабильный поток клиентов и запустить новое направление юридической компании." approach="Стратегии привлечения, партнёрский маркетинг, корпоративные коммуникации и PR." solution="Партнёрства с Торгово-промышленной палатой, Центром помощи мигрантам и migranto.ru; запуск нового бизнес-юнита." /><GrowthDashboard /></article>
         </div>
       </section>
 
@@ -215,8 +360,11 @@ export default function App() {
 
       <section className="education section" id="education">
         <div className="section-head reveal"><span>04 / ОБРАЗОВАНИЕ</span><h2>Образование<br/>и программы</h2><p>Высшее образование и дополнительное обучение.</p></div>
+        <div className="education-layout">
         <div className="edu-grid">
-          {education.map((row, i) => <article className="edu reveal" key={`${row[0]}-${row[1]}`}><span>{String(i + 1).padStart(2, "0")}</span><time>{row[0]}</time><h3>{row[1]}</h3><p>{row[2]}</p><i>↗</i></article>)}
+          {education.map((row, i) => <article className={`edu reveal ${activeCourse === i ? "active" : ""}`} tabIndex={0} onMouseEnter={() => setActiveCourse(i)} onFocus={() => setActiveCourse(i)} onClick={() => setActiveCourse(i)} key={`${row[0]}-${row[1]}`}><span>{String(i + 1).padStart(2, "0")}</span><time>{row[0]}</time><h3>{row[1]}</h3><p>{row[2]}</p><i>↗</i></article>)}
+        </div>
+        <LearningCube active={activeCourse} />
         </div>
         <div className="certificate-strip reveal"><span>ПОДТВЕРЖДЕНИЯ</span><div><b>ASPEX TECH CAMP</b><small>Business Analyst · 2026</small></div><div><b>1С-ОБРАЗОВАНИЕ</b><small>Старт в 1С · № DK387416</small></div><div><b>ЯНДЕКС.ДИРЕКТ</b><small>Электронный сертификат · 2022</small></div></div>
       </section>
