@@ -162,14 +162,14 @@ export default function App() {
 
       <section className="hero" id="top">
         <MiniDashboard />
-        <div className="hero-copy reveal">
+        <div className="hero-copy">
           <p className="index">ПОРТФОЛИО / 2026</p>
           <h1>Алина<br/><span>Васильева</span></h1>
           <h2>CCO / COO</h2>
           <div className="hero-fact"><strong>12 лет</strong><span>в управлении</span></div>
           <div className="hero-links"><a href="#cases">Кейсы ↓</a><a href="alina-vasileva-resume.pdf" download>Резюме PDF ↓</a></div>
         </div>
-        <div className="portrait reveal">
+        <div className="portrait">
           <img src="assets/alina-portrait.jpg" alt="Алина Васильева" />
         </div>
         <div className="location">САНКТ-ПЕТЕРБУРГ · ГОТОВА К КОМАНДИРОВКАМ</div>
