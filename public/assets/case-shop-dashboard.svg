@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 900" role="img" aria-label="Увеличение продаж интернет-магазина">
+  <defs>
+    <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14171c"/><stop offset=".2" stop-color="#fff"/><stop offset=".42" stop-color="#9da5ae"/><stop offset=".62" stop-color="#fff"/><stop offset=".82" stop-color="#68717c"/><stop offset="1" stop-color="#fafcff"/></linearGradient>
+    <linearGradient id="cyan" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#19d8ff"/><stop offset="1" stop-color="#7af2ff"/></linearGradient>
+    <style>
+      .bg{fill:#f7f9fa}.grid{stroke:#dde5e9;opacity:.55}.frame{fill:rgba(255,255,255,.58);stroke:#d1d9df;stroke-width:2;filter:drop-shadow(0 28px 54px rgba(45,55,65,.12))}.card{fill:rgba(255,255,255,.62);stroke:#d5dde3;stroke-width:2;animation:cards 4s ease-in-out infinite alternate}.big{font:600 132px Orbitron,Arial,sans-serif;letter-spacing:-.08em;fill:url(#chrome)}.label{font:500 23px Orbitron,Arial,sans-serif;letter-spacing:.12em;fill:#4f5963}.line{fill:none;stroke:url(#cyan);stroke-width:8;stroke-linecap:round;stroke-dasharray:900;animation:draw 4s ease-in-out infinite alternate}.dot{fill:#19d8ff;opacity:.55;animation:pulse 2.4s ease-in-out infinite}@keyframes draw{from{stroke-dashoffset:900}to{stroke-dashoffset:0}}@keyframes cards{from{opacity:.42;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}@keyframes pulse{50%{opacity:.18;transform:scale(1.4)}}
+    </style>
+  </defs>
+  <rect class="bg" width="1100" height="900" rx="46"/>
+  <path class="grid" d="M0 120H1100M0 240H1100M0 360H1100M0 480H1100M0 600H1100M0 720H1100M160 0V900M320 0V900M480 0V900M640 0V900M800 0V900M960 0V900"/>
+  <circle cx="795" cy="132" r="180" fill="#19d8ff" opacity=".12"/>
+  <rect class="frame" x="120" y="74" width="860" height="315" rx="44"/>
+  <rect class="frame" x="322" y="112" width="260" height="38" rx="19" opacity=".62"/>
+  <rect class="card" x="190" y="202" width="205" height="112" rx="24"/>
+  <rect class="card" x="448" y="202" width="205" height="112" rx="24"/>
+  <rect class="card" x="706" y="202" width="205" height="112" rx="24"/>
+  <rect class="card" x="142" y="482" width="142" height="158" rx="22"/>
+  <rect class="card" x="314" y="482" width="142" height="158" rx="22"/>
+  <rect class="card" x="486" y="482" width="142" height="158" rx="22"/>
+  <rect class="card" x="658" y="482" width="142" height="158" rx="22"/>
+  <rect class="card" x="830" y="482" width="142" height="158" rx="22"/>
+  <path class="line" d="M96 736C220 716 294 660 394 632S578 558 670 502 820 414 1010 362"/>
+  <text class="big" x="106" y="464">×3</text>
+  <text class="label" x="116" y="510">ЗАЯВКИ В ИНТЕРНЕТ-МАГАЗИН ЗА ГОД</text>
+  <text class="big" x="112" y="812">×5</text>
+  <text class="label" x="120" y="858">ПРОИЗВОДСТВО КОНТЕНТА</text>
+  <text class="big" x="668" y="794">0,4</text>
+  <text class="big" x="838" y="794">0,86</text>
+  <text class="label" x="670" y="844">КОНВЕРСИЯ САЙТА</text>
+  <circle class="dot" cx="312" cy="712" r="44"/><circle class="dot" cx="615" cy="620" r="44"/><circle class="dot" cx="842" cy="522" r="44"/>
+</svg>
