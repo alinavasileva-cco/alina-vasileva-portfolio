@@ -1,12 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 
+type CaseSceneType = "scale" | "profit" | "shop" | "product";
+
 type CaseItem = {
   title: string;
   context: string;
   task: string;
   approach: string;
   solution: string;
-  scene: "scale" | "profit" | "shop" | "product";
+  scene: CaseSceneType;
+};
+
+type ExperienceItem = {
+  year: string;
+  company: string;
+  role: string;
+  summary: string;
 };
 
 const cases: CaseItem[] = [
@@ -15,7 +24,7 @@ const cases: CaseItem[] = [
     context: "операционное управление",
     task: "Увеличить объём направления и сделать процессы управляемыми.",
     approach: "Связать продажи, проекты, отчётность и автоматизацию в один контур.",
-    solution: "Настроены CRM, 1С, BI-отчётность и AI-инструменты. Рост выручки — 71%, запущен 41 новый проект.",
+    solution: "Настроены Битрикс24, 1С, DataLens и AI-инструменты. Рост выручки — 71%, запущен 41 новый проект.",
     scene: "scale",
   },
   {
@@ -23,14 +32,14 @@ const cases: CaseItem[] = [
     context: "коммерческое управление",
     task: "Усилить коммерческий результат направления и довести сделки до запуска.",
     approach: "Управление пресейлом, КП, тендерами, прогнозом оборота и маржинальной прибыли.",
-    solution: "Оборот направления вырос в 4,7 раза, маржинальная прибыль — в 8,3 раза. Реализовано 8 запусков, выиграно 2 тендера.",
+    solution: "Оборот направления вырос в 4,7 раза, маржинальная прибыль — в 8,3 раза. Запущено 8 проектов и подготовлено КП более чем на 40 млн ₽.",
     scene: "profit",
   },
   {
     title: "Увеличение продаж интернет-магазина",
-    context: "маркетинг / сайт / производство контента",
-    task: "Увеличить поток заявок и повысить эффективность сайта и контент‑производства.",
-    approach: "Работа с сайтом, контентным циклом, рекламными материалами и аналитикой результата.",
+    context: "маркетинг / сайт / контент",
+    task: "Увеличить поток заявок и повысить эффективность сайта и контент-производства.",
+    approach: "Пересобрать связку «контент → сайт → заявка» и ускорить выпуск материалов.",
     solution: "Заявки выросли в 3 раза, производство контента — в 5 раз, конверсия сайта — на 16%.",
     scene: "shop",
   },
@@ -38,22 +47,22 @@ const cases: CaseItem[] = [
     title: "Создание продукта с 0",
     context: "новый бизнес-юнит",
     task: "Запустить самостоятельный продуктовый юнит с понятной экономикой.",
-    approach: "Сформировать продукт, упаковку, каналы входящего спроса и коммерческую модель без рекламной зависимости.",
-    solution: "Создан отдельный продуктовый модуль: маржинальность 80%+, 40 лидов в месяц без рекламных вложений.",
+    approach: "Сформировать продукт, упаковку, каналы спроса и коммерческую модель без рекламной зависимости.",
+    solution: "Создан продукт с маржинальностью 80%+, потоком 40 лидов в месяц и нулевыми рекламными вложениями.",
     scene: "product",
   },
 ];
 
-const experience = [
-  ["2026 — н.в.", "Медиа Инсайт", "Коммерческий директор / CCO", "Коммерческий контур, продажи, пресейл, тендеры"],
-  ["2023 — 2025", "Интерэстейт", "Исполнительный директор / COO", "P&L, процессы, команда, отчётность"],
-  ["2019 — 2022", "Сетевые коммуникации", "Руководитель маркетинга и PR", "Маркетинг, PR, сайт, контент, лидогенерация"],
-  ["2016 — 2019", "Альянс ТМ", "Директор по развитию", "Новые продукты, партнёрства, продажи"],
+const experience: ExperienceItem[] = [
+  { year: "2026", company: "Медиа Инсайт", role: "Коммерческий директор / CCO", summary: "Коммерческий контур, продажи, пресейл, тендеры" },
+  { year: "2023 — 2025", company: "Интерэстейт", role: "Исполнительный директор / COO", summary: "P&L, процессы, команда, отчётность" },
+  { year: "2019 — 2022", company: "Сетевые коммуникации", role: "Руководитель маркетинга и PR", summary: "Маркетинг, PR, сайт, контент, лидогенерация" },
+  { year: "2016 — 2019", company: "Альянс ТМ", role: "Директор по развитию", summary: "Новые продукты, партнёрства, продажи" },
 ];
 
 const education = [
   { year: "2026", title: "Бизнес-анализ", source: "ASPEX · бизнес-аналитик", level: 11 },
-  { year: "2026", title: "Старт в 1С", source: "1С · 6 академических часов", level: 10 },
+  { year: "2026", title: "Старт в 1С", source: "1С", level: 10 },
   { year: "2025", title: "Управление и мотивация команд", source: "SETTERS", level: 9 },
   { year: "2025", title: "Re:start. Дао-Перезагрузка", source: "Ирина Хакамада", level: 8 },
   { year: "2024", title: "Менторская программа «Новый шаг»", source: "Forbes Woman · ментор Сколково", level: 7 },
@@ -92,50 +101,41 @@ function useScrollProgress() {
 }
 
 function HeroDashboard() {
-  return (
-    <div className="hero-dashboard" aria-hidden="true">
-      <div className="glass-panel panel-a"><span>REVENUE</span><i /></div>
-      <div className="glass-panel panel-b"><span>PROJECTS</span><b>41</b></div>
-      <svg viewBox="0 0 640 280" className="hero-line">
-        <path d="M20 240 C100 215 120 225 178 184 S268 172 324 126 418 122 468 78 550 72 620 22" />
-      </svg>
-      <div className="hero-system"><span>CRM</span><span>1C</span><span>BI</span><span>AI</span></div>
-    </div>
-  );
+  return null;
 }
 
-const sceneAlt: Record<CaseItem["scene"], string> = {
+const sceneAlt: Record<CaseSceneType, string> = {
   scale: "Автоматизация процессов: рост выручки на 71% и 41 новый проект",
-  profit: "Рост прибыли: коммерческий дашборд в ноутбуке",
-  shop: "Производство контента: рост заявок, контента и конверсии сайта",
-  product: "Создание продукта с нуля: попадание в цель и показатели продукта",
+  profit: "Рост прибыли: реальный ноутбук с графиком роста и показателями",
+  shop: "Рост продаж интернет-магазина: контент, заявки и конверсия",
+  product: "Создание продукта с нуля: дартс и показатели продукта",
 };
 
-const neonViewBox: Record<CaseItem["scene"], string> = {
-  scale: "0 0 280 498",
+const sceneSource: Record<CaseSceneType, string> = {
+  scale: "assets/case-scale-dashboard.svg",
+  profit: "assets/case-profit-photo.svg",
+  shop: "assets/case-shop-dashboard.svg",
+  product: "assets/case-product-photo.svg",
+};
+
+const neonPath: Record<CaseSceneType, string> = {
+  scale: "M250 1320 C345 1270 425 1195 510 1170 S660 1080 740 1010 820 950 875 900",
+  profit: "M240 610 C320 575 355 590 420 515 S520 495 585 430 670 420 740 330 815 255",
+  shop: "M160 870 C245 845 320 790 400 730 S520 650 610 565 700 470 810 385",
+  product: "M565 424 C605 412 640 387 680 360",
+};
+
+const neonViewBox: Record<CaseSceneType, string> = {
+  scale: "0 0 900 1599",
   profit: "0 0 900 1200",
   shop: "0 0 900 1200",
   product: "0 0 900 1200",
 };
 
-const neonPath: Record<CaseItem["scene"], string> = {
-  scale: "M118 420 C145 407 164 389 184 371 S222 330 247 298 264 266 272 245",
-  profit: "M245 610 C325 575 355 590 415 520 S520 500 570 430 660 420 730 330 805 255",
-  shop: "M380 510 C455 480 500 455 555 405 S660 330 790 260",
-  product: "M95 340 C245 325 350 300 485 255 S635 220 715 205",
-};
-
-function CaseScene({ type }: { type: CaseItem["scene"] }) {
-  const source = {
-    scale: "assets/case-scale-dashboard.svg",
-    profit: "assets/case-profit-dashboard.svg",
-    shop: "assets/case-shop-dashboard.svg",
-    product: "assets/case-product-dashboard.svg",
-  }[type];
-
+function CaseScene({ type }: { type: CaseSceneType }) {
   return (
     <div className="case-art">
-      <img src={source} alt={sceneAlt[type]} />
+      <img src={sceneSource[type]} alt={sceneAlt[type]} />
       <svg className={`case-neon case-neon-${type}`} viewBox={neonViewBox[type]} aria-hidden="true">
         <path d={neonPath[type]} />
       </svg>
@@ -155,7 +155,7 @@ function CaseCard({ item }: { item: CaseItem }) {
           <div><span>Решение</span><p>{item.solution}</p></div>
         </div>
       </div>
-      <div className="case-dashboard">
+      <div className="case-dashboard case-dashboard-shadow">
         <CaseScene type={item.scene} />
       </div>
     </article>
@@ -208,7 +208,7 @@ export default function App() {
       <div className="progress" style={{ transform: `scaleX(${progress})` }} />
 
       <header>
-        <a className="brand" href="#top" onClick={closeMenu}>AV <span>/ CCO</span></a>
+        <a className="brand brand-word" href="#top" onClick={closeMenu}>Портфолио</a>
         <nav className={menuOpen ? "open" : ""}>
           <a href="#cases" onClick={closeMenu}>Кейсы</a>
           <a href="#experience" onClick={closeMenu}>Опыт</a>
@@ -221,19 +221,17 @@ export default function App() {
       <section className="hero" id="top">
         <HeroDashboard />
         <div className="hero-copy reveal visible">
-          <span>ПОРТФОЛИО / 2026</span>
-          <h1>Алина<br /><em>Васильева</em></h1>
-          <p>Коммерческий директор · CCO · COO</p>
-          <div className="hero-fact"><b>12 лет</b><span>в управлении</span></div>
-          <div className="hero-links">
+          <div className="hero-links hero-links-top">
             <a href="#cases">Кейсы ↓</a>
             <a href="alina-vasileva-resume.pdf" download>Резюме PDF ↓</a>
           </div>
+          <h1>Алина<br /><em>Васильева</em></h1>
+          <p>Коммерческий директор · CCO · COO</p>
+          <div className="hero-fact"><b>12 лет</b><span>в управлении</span></div>
         </div>
         <div className="portrait reveal visible">
           <img src="assets/alina-portrait.jpg" alt="Алина Васильева" />
         </div>
-        <div className="location">Санкт-Петербург · готова к командировкам</div>
       </section>
 
       <section className="section cases" id="cases">
@@ -245,16 +243,15 @@ export default function App() {
 
       <section className="section experience" id="experience">
         <div className="section-head reveal">
-          <span>ОПЫТ</span>
           <h2>Опыт работы</h2>
         </div>
-        <div className="table">
+        <div className="table table-horizontal">
           {experience.map((row) => (
-            <article className="table-row reveal" key={`${row[0]}-${row[1]}`}>
-              <time>{row[0]}</time>
-              <h3>{row[1]}</h3>
-              <p>{row[2]}</p>
-              <span>{row[3]}</span>
+            <article className="table-row reveal" key={`${row.year}-${row.company}`}>
+              <time>{row.year}</time>
+              <p>{row.role}</p>
+              <h3>{row.company}</h3>
+              <span>{row.summary}</span>
             </article>
           ))}
         </div>
@@ -262,7 +259,6 @@ export default function App() {
 
       <section className="section education" id="education">
         <div className="section-head reveal">
-          <span>ОБРАЗОВАНИЕ</span>
           <h2>Обучение</h2>
         </div>
         <div className="education-layout">
@@ -289,7 +285,7 @@ export default function App() {
 
       <section className="contact" id="contact">
         <span>КОНТАКТЫ</span>
-        <h2>Коммерческий директор</h2>
+        <h2>Ваш бизнес<br />должен расти</h2>
         <div>
           <a href="mailto:alinavasileva.jour@gmail.com">alinavasileva.jour@gmail.com ↗</a>
           <a href="https://t.me/AlinaVasileva" target="_blank" rel="noreferrer">Telegram ↗</a>
