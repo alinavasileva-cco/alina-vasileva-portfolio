@@ -46,9 +46,9 @@ const cases: CaseItem[] = [
 
 const experience = [
   ["2026 — н.в.", "Медиа Инсайт", "Коммерческий директор / CCO", "Коммерческий контур, продажи, пресейл, тендеры"],
-  ["2023 — 2025", "Интерэстейт / SETEVIE", "Исполнительный директор / COO", "P&L, процессы, команда, отчётность"],
-  ["2019 — 2022", "GARWIN", "Руководитель маркетинга и PR", "Маркетинг, PR, сайт, контент, лидогенерация"],
-  ["2016 — 2019", "Альянс", "Директор по развитию", "Новые продукты, партнёрства, продажи"],
+  ["2023 — 2025", "Интерэстейт", "Исполнительный директор / COO", "P&L, процессы, команда, отчётность"],
+  ["2019 — 2022", "Сетевые коммуникации", "Руководитель маркетинга и PR", "Маркетинг, PR, сайт, контент, лидогенерация"],
+  ["2016 — 2019", "Альянс ТМ", "Директор по развитию", "Новые продукты, партнёрства, продажи"],
 ];
 
 const education = [
@@ -94,26 +94,29 @@ function useScrollProgress() {
 function HeroDashboard() {
   return (
     <div className="hero-dashboard" aria-hidden="true">
-      <div className="glass-panel panel-a">
-        <span>REVENUE</span>
-        <i />
-      </div>
-      <div className="glass-panel panel-b">
-        <span>PROJECTS</span>
-        <b>41</b>
-      </div>
+      <div className="glass-panel panel-a"><span>REVENUE</span><i /></div>
+      <div className="glass-panel panel-b"><span>PROJECTS</span><b>41</b></div>
       <svg viewBox="0 0 640 280" className="hero-line">
         <path d="M20 240 C100 215 120 225 178 184 S268 172 324 126 418 122 468 78 550 72 620 22" />
       </svg>
-      <div className="hero-system">
-        <span>CRM</span>
-        <span>1C</span>
-        <span>BI</span>
-        <span>AI</span>
-      </div>
+      <div className="hero-system"><span>CRM</span><span>1C</span><span>BI</span><span>AI</span></div>
     </div>
   );
 }
+
+const sceneAlt: Record<CaseItem["scene"], string> = {
+  scale: "Автоматизация процессов: рост выручки на 71% и 41 новый проект",
+  profit: "Рост прибыли: коммерческий дашборд в ноутбуке",
+  shop: "Производство контента и рост продаж интернет-магазина",
+  product: "Создание продукта с нуля: попадание в цель и показатели продукта",
+};
+
+const neonPath: Record<CaseItem["scene"], string> = {
+  scale: "M245 1035 C345 1000 410 930 500 900 S665 790 850 685",
+  profit: "M245 610 C325 575 355 590 415 520 S520 500 570 430 660 420 730 330 805 255",
+  shop: "M380 510 C455 480 500 455 555 405 S660 330 790 260",
+  product: "M95 340 C245 325 350 300 485 255 S635 220 715 205",
+};
 
 function CaseScene({ type }: { type: CaseItem["scene"] }) {
   const source = {
@@ -122,9 +125,13 @@ function CaseScene({ type }: { type: CaseItem["scene"] }) {
     shop: "assets/case-shop-dashboard.svg",
     product: "assets/case-product-dashboard.svg",
   }[type];
+
   return (
     <div className="case-art">
-      <img src={source} alt="" />
+      <img src={source} alt={sceneAlt[type]} />
+      <svg className={`case-neon case-neon-${type}`} viewBox="0 0 900 1200" aria-hidden="true">
+        <path d={neonPath[type]} />
+      </svg>
     </div>
   );
 }
@@ -187,17 +194,19 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <main ref={mainRef}>
       <div className="progress" style={{ transform: `scaleX(${progress})` }} />
 
       <header>
-        <a className="brand" href="#top">AV <span>/ CCO</span></a>
+        <a className="brand" href="#top" onClick={closeMenu}>AV <span>/ CCO</span></a>
         <nav className={menuOpen ? "open" : ""}>
-          <a href="#cases">Кейсы</a>
-          <a href="#experience">Опыт</a>
-          <a href="#education">Образование</a>
-          <a href="#contact">Контакты</a>
+          <a href="#cases" onClick={closeMenu}>Кейсы</a>
+          <a href="#experience" onClick={closeMenu}>Опыт</a>
+          <a href="#education" onClick={closeMenu}>Образование</a>
+          <a href="#contact" onClick={closeMenu}>Контакты</a>
         </nav>
         <button className="menu" onClick={() => setMenuOpen((value) => !value)} aria-label="Меню"><i /><i /></button>
       </header>
@@ -253,7 +262,7 @@ export default function App() {
         <div className="education-layout">
           <EducationObject level={activeLevel} />
           <div className="edu-list">
-            {education.map((row, index) => (
+            {education.map((row) => (
               <article
                 className={activeLevel === row.level ? "edu active" : "edu"}
                 key={`${row.year}-${row.title}`}
