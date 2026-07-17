@@ -7,6 +7,7 @@ import "./typography-fixes.css";
 import "./mobile-hero.css";
 import "./approved-design.css";
 import "./approved-polish.css";
+import "./mobile-final-overrides.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
