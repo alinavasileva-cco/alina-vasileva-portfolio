@@ -12,6 +12,7 @@ import "./approved-scale.css";
 import "./final-overrides.css";
 import "./visual-polish.css";
 import "./visual-final-pass.css";
+import "./visual-final-qa.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
