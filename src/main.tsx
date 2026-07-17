@@ -8,6 +8,7 @@ import "./mobile-hero.css";
 import "./approved-design.css";
 import "./approved-polish.css";
 import "./mobile-final-overrides.css";
+import "./approved-scale.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
