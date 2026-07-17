@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="Создание продукта с нуля: дартс и коммерческие показатели">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#020507"/><stop offset=".58" stop-color="#071018"/><stop offset="1" stop-color="#010203"/></linearGradient>
+  <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f9fdff"/><stop offset=".16" stop-color="#646d77"/><stop offset=".34" stop-color="#ffffff"/><stop offset=".53" stop-color="#20262d"/><stop offset=".72" stop-color="#dce8ef"/><stop offset="1" stop-color="#707984"/></linearGradient>
+  <radialGradient id="cyanGlow"><stop offset="0" stop-color="#4fd5ff" stop-opacity=".34"/><stop offset="1" stop-color="#4fd5ff" stop-opacity="0"/></radialGradient>
+  <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <pattern id="grid" width="72" height="72" patternUnits="userSpaceOnUse"><path d="M72 0H0V72" fill="none" stroke="#5b7687" stroke-opacity=".12" stroke-width="1"/></pattern>
+  <style>.metric{font:700 92px Arial,sans-serif;fill:url(#chrome);letter-spacing:-4px}.label{font:500 20px Arial,sans-serif;fill:#b3c0ca;letter-spacing:2.5px}</style>
+</defs>
+<rect width="900" height="1200" rx="40" fill="url(#bg)"/>
+<rect width="900" height="1200" rx="40" fill="url(#grid)"/>
+<circle cx="660" cy="360" r="310" fill="url(#cyanGlow)"/>
+<g transform="translate(500 130)">
+  <circle cx="190" cy="250" r="220" fill="#05090c" stroke="url(#chrome)" stroke-width="18"/>
+  <circle cx="190" cy="250" r="170" fill="none" stroke="#6c7b86" stroke-width="5"/>
+  <circle cx="190" cy="250" r="115" fill="none" stroke="#6c7b86" stroke-width="5"/>
+  <circle cx="190" cy="250" r="58" fill="#07141d" stroke="#7ee5ff" stroke-opacity=".52" stroke-width="6"/>
+  <circle cx="190" cy="250" r="18" fill="#9eeaff" filter="url(#glow)"/>
+  <g stroke="#596873" stroke-width="3"><path d="M190 30V470M-30 250H410M34 94L346 406M346 94L34 406"/></g>
+</g>
+<g transform="translate(40 220) rotate(-8 300 120)">
+  <path d="M0 130H510" stroke="url(#chrome)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M510 130L570 100L550 130L570 160Z" fill="#dff8ff"/>
+  <path d="M18 130L92 68L118 130L92 192Z" fill="#3a454e" stroke="#9aa9b4" stroke-width="3"/>
+  <path d="M70 130L128 92L144 130L128 168Z" fill="#121a20"/>
+</g>
+<g transform="translate(100 610)">
+  <rect x="0" y="0" width="260" height="230" rx="48" fill="url(#chrome)" opacity=".82"/>
+  <circle cx="130" cy="115" r="82" fill="#060b0f" stroke="#b6c7d1" stroke-width="3"/>
+  <circle cx="130" cy="115" r="48" fill="none" stroke="#5edcff" stroke-opacity=".38" stroke-width="4"/>
+  <circle cx="130" cy="115" r="12" fill="#8ce8ff" filter="url(#glow)"/>
+</g>
+<text x="420" y="720" class="metric" style="font-size:84px">80+%</text><text x="424" y="760" class="label">МАРЖИНАЛЬНОСТЬ</text>
+<text x="420" y="895" class="metric">40</text><text x="424" y="935" class="label">ЛИДОВ В МЕСЯЦ</text>
+<text x="420" y="1070" class="metric">0 ₽</text><text x="424" y="1110" class="label">РЕКЛАМНЫХ ВЛОЖЕНИЙ</text>
+</svg>
