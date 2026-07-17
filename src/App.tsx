@@ -111,8 +111,15 @@ const sceneAlt: Record<CaseItem["scene"], string> = {
   product: "Создание продукта с нуля: попадание в цель и показатели продукта",
 };
 
+const neonViewBox: Record<CaseItem["scene"], string> = {
+  scale: "0 0 280 498",
+  profit: "0 0 900 1200",
+  shop: "0 0 900 1200",
+  product: "0 0 900 1200",
+};
+
 const neonPath: Record<CaseItem["scene"], string> = {
-  scale: "M245 1035 C345 1000 410 930 500 900 S665 790 850 685",
+  scale: "M118 420 C145 407 164 389 184 371 S222 330 247 298 264 266 272 245",
   profit: "M245 610 C325 575 355 590 415 520 S520 500 570 430 660 420 730 330 805 255",
   shop: "M380 510 C455 480 500 455 555 405 S660 330 790 260",
   product: "M95 340 C245 325 350 300 485 255 S635 220 715 205",
@@ -129,7 +136,7 @@ function CaseScene({ type }: { type: CaseItem["scene"] }) {
   return (
     <div className="case-art">
       <img src={source} alt={sceneAlt[type]} />
-      <svg className={`case-neon case-neon-${type}`} viewBox="0 0 900 1200" aria-hidden="true">
+      <svg className={`case-neon case-neon-${type}`} viewBox={neonViewBox[type]} aria-hidden="true">
         <path d={neonPath[type]} />
       </svg>
     </div>
