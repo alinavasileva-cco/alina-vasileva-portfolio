@@ -3,44 +3,72 @@ import { useState } from "react";
 const base = import.meta.env.BASE_URL;
 
 const expertise = [
-  ["Коммерческая стратегия", "Бизнес-модель, экономика направления, план продаж и управленческий контур.", "target"],
-  ["Управление продажами", "Пресейл, воронка, тендеры, прогнозирование и развитие команды.", "bars"],
-  ["Маркетинг и бренд", "Позиционирование, продуктовая упаковка, контент и система привлечения спроса.", "megaphone"],
-  ["Автоматизация и аналитика", "CRM, 1С, DataLens, AI и управленческие дашборды.", "pie"],
+  {
+    title: "Коммерческая стратегия",
+    text: "Бизнес-модель, экономика направления, план продаж и управленческий контур.",
+  },
+  {
+    title: "Управление продажами",
+    text: "Пресейл, воронка, тендеры, прогнозирование и развитие команды.",
+  },
+  {
+    title: "Маркетинг и бренд",
+    text: "Позиционирование, продуктовая упаковка, контент и система привлечения спроса.",
+  },
+  {
+    title: "Автоматизация и аналитика",
+    text: "CRM, 1С, DataLens, AI и управленческие дашборды.",
+  },
 ];
 
 const cases = [
   {
     number: "01",
     label: "Операционное управление",
-    title: "Масштабирование направления",
-    text: "CRM, 1С, DataLens и AI связаны в единый управляемый коммерческий контур.",
-    facts: [["+71%", "рост выручки год к году"], ["41", "новый проект"]],
-    visual: "system",
+    title: "Автоматизация коммерческого контура",
+    text: "CRM, 1С, DataLens и AI связаны в единую систему управления продажами, проектами и отчётностью.",
+    facts: [
+      ["+71%", "рост выручки год к году"],
+      ["41", "новый проект"],
+    ],
+    visual: "automation",
   },
   {
     number: "02",
     label: "Коммерческое управление",
     title: "Рост направления и прибыли",
-    text: "Пересобраны пресейл, тендеры, коммерческие предложения и прогнозирование сделок.",
-    facts: [["×4,7", "оборот направления"], ["×8,3", "маржинальная прибыль"], ["8", "проектных запусков"], ["40+ млн ₽", "коммерческих предложений"]],
-    visual: "laptop",
+    text: "Пересобраны пресейл, тендерный процесс, коммерческие предложения и прогнозирование сделок.",
+    facts: [
+      ["×4,7", "оборот направления"],
+      ["×8,3", "маржинальная прибыль"],
+      ["8", "проектных запусков"],
+      ["40+ млн ₽", "коммерческих предложений"],
+    ],
+    visual: "growth",
   },
   {
     number: "03",
     label: "Маркетинг / сайт / контент",
     title: "Рост интернет-магазина",
-    text: "Связка контента, сайта и заявки стала измеримой и управляемой.",
-    facts: [["×3", "заявки"], ["×5", "производство контента"], ["+16%", "конверсия сайта"]],
-    visual: "content",
+    text: "Связка контента, сайта и заявки стала измеримой: путь клиента, производство материалов и конверсия управляются в одном контуре.",
+    facts: [
+      ["×3", "заявки"],
+      ["×5", "производство контента"],
+      ["+16%", "конверсия сайта"],
+    ],
+    visual: "funnel",
   },
   {
     number: "04",
     label: "Запуск продукта",
     title: "Новый бизнес-юнит",
-    text: "Продукт запущен с нуля и выведен на устойчивую экономику без рекламных вложений.",
-    facts: [["80%+", "маржинальность"], ["40", "лидов в месяц"], ["0 ₽", "рекламных вложений"]],
-    visual: "target",
+    text: "Продукт создан с нуля, проверен на рынке и выведен на устойчивую экономику без рекламных вложений.",
+    facts: [
+      ["80%+", "маржинальность"],
+      ["40", "лидов в месяц"],
+      ["0 ₽", "рекламных вложений"],
+    ],
+    visual: "pipeline",
   },
 ];
 
@@ -59,52 +87,209 @@ const education = [
   ["2024", "Менторская программа «Новый шаг»", "Forbes Woman"],
 ];
 
-function TrendGraph() {
+function HeroTrend() {
   return (
-    <svg className="trend-graph" viewBox="0 0 900 520" aria-hidden="true">
+    <svg className="hero-trend" viewBox="0 0 760 620" aria-hidden="true">
       <defs>
-        <linearGradient id="trendStroke" x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0" stopColor="#07344a" />
-          <stop offset=".55" stopColor="#12bddd" />
-          <stop offset="1" stopColor="#62efff" />
+        <linearGradient id="heroTrendStroke" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stopColor="#0a3144" />
+          <stop offset="0.55" stopColor="#0f91ad" />
+          <stop offset="1" stopColor="#76eefe" />
         </linearGradient>
-        <filter id="trendGlow"><feGaussianBlur stdDeviation="8" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+        <filter id="heroGlow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="8" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
       </defs>
-      {Array.from({ length: 10 }).map((_, i) => <line key={`v${i}`} x1={i * 100} y1="0" x2={i * 100} y2="520" className="grid-line" />)}
-      {Array.from({ length: 7 }).map((_, i) => <line key={`h${i}`} x1="0" y1={i * 86} x2="900" y2={i * 86} className="grid-line" />)}
-      <path className="trend-soft t1" d="M0 500 C180 480 260 430 350 390 S510 330 590 250 S720 170 900 28" />
-      <path className="trend-soft t2" d="M0 510 C160 500 300 470 410 425 S570 315 650 290 S770 180 900 62" />
-      <path className="trend-soft t3" d="M0 495 C130 490 255 455 360 420 S520 360 620 300 S760 160 900 48" />
-      <path className="trend-main" d="M0 505 C120 500 245 470 345 423 S510 360 585 315 S660 258 725 205 S820 130 900 34" />
-      {[345, 585, 725, 900].map((x, i) => <circle key={x} cx={x} cy={[423,315,205,34][i]} r="7" className="trend-point" />)}
+      <g className="hero-grid-lines">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <line key={`v-${index}`} x1={72 + index * 84} y1="78" x2={72 + index * 84} y2="566" />
+        ))}
+        {Array.from({ length: 7 }).map((_, index) => (
+          <line key={`h-${index}`} x1="46" y1={110 + index * 70} x2="728" y2={110 + index * 70} />
+        ))}
+      </g>
+      <path className="hero-path hero-path-muted" d="M54 535 C150 520 184 466 252 454 S368 438 430 372 S534 318 596 231 S672 150 714 92" />
+      <path className="hero-path hero-path-main" filter="url(#heroGlow)" d="M54 542 C132 527 178 498 232 474 S344 446 402 398 S510 346 564 278 S646 210 712 94" />
+      <g className="hero-nodes">
+        <circle cx="232" cy="474" r="6" />
+        <circle cx="402" cy="398" r="6" />
+        <circle cx="564" cy="278" r="6" />
+        <circle cx="712" cy="94" r="7" />
+      </g>
     </svg>
   );
 }
 
-function DashboardVisual() {
+function AutomationVisual() {
+  const nodes = [
+    { x: 142, y: 124, label: "CRM" },
+    { x: 496, y: 124, label: "1С" },
+    { x: 142, y: 386, label: "DataLens" },
+    { x: 496, y: 386, label: "AI" },
+  ];
+
   return (
-    <div className="dashboard-scene" aria-label="Автоматизация коммерческих процессов">
-      <div className="dashboard-grid" />
-      <div className="screen side left"><span className="mini-bars"><i /><i /><i /><i /></span></div>
-      <div className="screen main">
-        <span className="screen-label">Автоматизация процессов</span>
-        <strong>+71%</strong>
-        <small>выручки год к году</small>
-        <svg viewBox="0 0 260 90" aria-hidden="true"><path d="M8 80 C55 65 72 52 104 57 S155 39 178 31 S225 26 252 6" /><circle cx="104" cy="57" r="4" /><circle cx="178" cy="31" r="4" /><circle cx="252" cy="6" r="4" /></svg>
-        <div className="screen-facts"><span><b>41</b> новый проект</span><span><b>5×</b> меньше операционной нагрузки</span></div>
-      </div>
-      <div className="screen side right"><span className="mini-donut" /></div>
-      <div className="platform"><i /></div>
-      {[["Битрикс24","crm"],["1С","one-c"],["DataLens","data"],["AI","ai"]].map(([label, cls]) => <span key={label} className={`system-tag ${cls}`}>{label}</span>)}
-    </div>
+    <svg className="data-visual automation-visual" viewBox="0 0 640 520" aria-label="Схема единого коммерческого контура">
+      <defs>
+        <radialGradient id="hubFill" cx="50%" cy="42%" r="70%">
+          <stop offset="0" stopColor="#18394a" stopOpacity="0.95" />
+          <stop offset="1" stopColor="#07131d" stopOpacity="0.92" />
+        </radialGradient>
+        <filter id="nodeGlow" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="7" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+      </defs>
+      <g className="network-lines">
+        {nodes.map((node) => (
+          <path key={node.label} d={`M320 260 C320 260 ${node.x} ${node.y} ${node.x} ${node.y}`} />
+        ))}
+      </g>
+      <circle className="hub-ring hub-ring-outer" cx="320" cy="260" r="110" />
+      <circle className="hub-ring hub-ring-inner" cx="320" cy="260" r="78" />
+      <circle className="hub-core" cx="320" cy="260" r="60" fill="url(#hubFill)" />
+      <text className="hub-title" x="320" y="252" textAnchor="middle">КОММЕРЧЕСКИЙ</text>
+      <text className="hub-title" x="320" y="278" textAnchor="middle">КОНТУР</text>
+      {nodes.map((node) => (
+        <g className="system-node" key={node.label} transform={`translate(${node.x} ${node.y})`}>
+          <circle className="system-node-halo" r="42" />
+          <circle className="system-node-core" r="31" filter="url(#nodeGlow)" />
+          <text x="0" y="5" textAnchor="middle">{node.label}</text>
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+function GrowthDashboard() {
+  return (
+    <svg className="data-visual growth-visual" viewBox="0 0 680 500" aria-label="Дашборд роста направления">
+      <defs>
+        <linearGradient id="growthArea" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#18c9e7" stopOpacity="0.32" />
+          <stop offset="1" stopColor="#18c9e7" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="growthStroke" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stopColor="#25677d" />
+          <stop offset="0.55" stopColor="#1bc7e4" />
+          <stop offset="1" stopColor="#9af6ff" />
+        </linearGradient>
+        <filter id="growthGlow" x="-25%" y="-25%" width="150%" height="150%">
+          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+      </defs>
+      <g className="chart-grid">
+        {Array.from({ length: 8 }).map((_, index) => <line key={`x-${index}`} x1={58 + index * 80} y1="60" x2={58 + index * 80} y2="430" />)}
+        {Array.from({ length: 6 }).map((_, index) => <line key={`y-${index}`} x1="58" y1={70 + index * 72} x2="622" y2={70 + index * 72} />)}
+      </g>
+      <path className="chart-area" d="M60 405 C112 392 144 366 190 352 S256 336 300 288 S364 268 410 222 S482 178 526 132 S580 104 620 64 L620 430 L60 430 Z" fill="url(#growthArea)" />
+      <path className="chart-line chart-line-secondary" d="M60 382 C130 356 166 360 222 322 S314 300 366 262 S472 238 520 188 S574 166 620 142" />
+      <path className="chart-line chart-line-main" filter="url(#growthGlow)" d="M60 405 C112 392 144 366 190 352 S256 336 300 288 S364 268 410 222 S482 178 526 132 S580 104 620 64" stroke="url(#growthStroke)" />
+      <g className="chart-points">
+        {[[60,405],[190,352],[300,288],[410,222],[526,132],[620,64]].map(([x,y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r="6" />)}
+      </g>
+      <g className="mini-bars">
+        {[54, 82, 68, 112, 128, 164].map((height, index) => <rect key={height} x={76 + index * 46} y={425 - height} width="18" height={height} rx="4" />)}
+      </g>
+    </svg>
+  );
+}
+
+function FunnelDashboard() {
+  return (
+    <svg className="data-visual funnel-visual" viewBox="0 0 680 520" aria-label="Воронка интернет-магазина">
+      <defs>
+        <linearGradient id="flowStroke" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#0c566d" />
+          <stop offset="0.55" stopColor="#17bddd" />
+          <stop offset="1" stopColor="#8af3ff" />
+        </linearGradient>
+        <filter id="flowGlow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="5" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+      </defs>
+      <g className="funnel-rails">
+        <path d="M54 112 H626" />
+        <path d="M98 224 H582" />
+        <path d="M160 336 H520" />
+        <path d="M244 448 H436" />
+      </g>
+      <path className="funnel-flow flow-one" d="M72 90 C180 128 236 170 340 190 S500 220 606 250" />
+      <path className="funnel-flow flow-two" d="M72 174 C188 200 250 246 340 268 S482 306 606 340" />
+      <path className="funnel-flow flow-main" filter="url(#flowGlow)" d="M72 72 C170 120 238 210 340 260 S500 372 606 442" stroke="url(#flowStroke)" />
+      <g className="funnel-stages">
+        {[
+          [98,112,"КОНТЕНТ"],
+          [220,224,"САЙТ"],
+          [356,336,"ЗАЯВКА"],
+          [512,448,"СДЕЛКА"],
+        ].map(([x,y,label]) => (
+          <g key={label as string} transform={`translate(${x} ${y})`}>
+            <circle r="30" />
+            <text y="5" textAnchor="middle">{label}</text>
+          </g>
+        ))}
+      </g>
+      <g className="funnel-bars">
+        {[180, 142, 108, 72].map((width, index) => <rect key={width} x="470" y={62 + index * 74} width={width} height="18" rx="9" />)}
+      </g>
+    </svg>
+  );
+}
+
+function PipelineDashboard() {
+  return (
+    <svg className="data-visual pipeline-visual" viewBox="0 0 680 520" aria-label="Развитие нового бизнес-юнита">
+      <defs>
+        <linearGradient id="pipelineArea" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#25cae6" stopOpacity="0.24" />
+          <stop offset="1" stopColor="#25cae6" stopOpacity="0" />
+        </linearGradient>
+        <filter id="pipelineGlow" x="-35%" y="-35%" width="170%" height="170%">
+          <feGaussianBlur stdDeviation="6" result="blur" />
+          <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+        </filter>
+      </defs>
+      <path className="pipeline-baseline" d="M72 360 H610" />
+      <path className="pipeline-area" d="M72 350 C136 338 164 302 216 294 S312 254 354 218 S444 190 484 142 S556 100 610 72 L610 360 H72 Z" fill="url(#pipelineArea)" />
+      <path className="pipeline-line" filter="url(#pipelineGlow)" d="M72 350 C136 338 164 302 216 294 S312 254 354 218 S444 190 484 142 S556 100 610 72" />
+      <g className="pipeline-milestones">
+        {[
+          [96,350,"MVP"],
+          [232,294,"ПЕРВЫЕ КЛИЕНТЫ"],
+          [376,218,"PIPELINE"],
+          [516,126,"МАСШТАБ"],
+        ].map(([x,y,label], index) => (
+          <g key={label as string} transform={`translate(${x} ${y})`}>
+            <circle className="milestone-halo" r={34 + index * 3} />
+            <circle className="milestone-core" r="8" />
+            <text y="64" textAnchor="middle">{label}</text>
+          </g>
+        ))}
+      </g>
+      <g className="client-stream">
+        {[0,1,2,3,4,5].map((index) => (
+          <g key={index} transform={`translate(${126 + index * 74} ${430 - (index % 2) * 16})`}>
+            <circle r="13" />
+            <path d="M-18 24 C-8 12 8 12 18 24" />
+          </g>
+        ))}
+      </g>
+    </svg>
   );
 }
 
 function CaseVisual({ type }: { type: string }) {
-  if (type === "system") return <DashboardVisual />;
-  if (type === "laptop") return <div className="laptop-visual"><div className="laptop-screen"><span className="graph-line" /><i className="dot d1" /><i className="dot d2" /><i className="dot d3" /></div><div className="laptop-base" /></div>;
-  if (type === "content") return <div className="content-visual"><div className="camera-shape"><i /></div><div className="monitor-shape"><span /><span /><span /></div></div>;
-  return <div className="target-visual"><span className="ring r1" /><span className="ring r2" /><span className="ring r3" /><i className="arrow" /></div>;
+  if (type === "automation") return <AutomationVisual />;
+  if (type === "growth") return <GrowthDashboard />;
+  if (type === "funnel") return <FunnelDashboard />;
+  return <PipelineDashboard />;
 }
 
 export default function App() {
@@ -114,68 +299,149 @@ export default function App() {
   return (
     <main className="tech-site" id="top">
       <header className="site-header">
-        <a className="brand" href="#top" onClick={closeMenu}><span>А</span>V <small>ПОРТФОЛИО</small></a>
-        <button className={menuOpen ? "menu-button is-open" : "menu-button"} aria-label="Открыть меню" aria-expanded={menuOpen} onClick={() => setMenuOpen(v => !v)}><span /><span /></button>
+        <a className="brand" href="#top" onClick={closeMenu} aria-label="На главную">
+          AV <span>/</span><small>ПОРТФОЛИО</small>
+        </a>
+        <button
+          className={menuOpen ? "menu-button is-open" : "menu-button"}
+          type="button"
+          aria-label="Открыть меню"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((value) => !value)}
+        >
+          <span /><span />
+        </button>
         <nav className={menuOpen ? "site-nav is-open" : "site-nav"}>
+          <a href="#about" onClick={closeMenu}>Профиль</a>
           <a href="#expertise" onClick={closeMenu}>Экспертиза</a>
-          <a href="#projects" onClick={closeMenu}>Кейсы</a>
+          <a href="#projects" onClick={closeMenu}>Проекты</a>
           <a href="#experience" onClick={closeMenu}>Опыт</a>
           <a href="#education" onClick={closeMenu}>Обучение</a>
           <a href="#contact" onClick={closeMenu}>Контакты</a>
         </nav>
       </header>
 
-      <section className="hero">
+      <section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy">
           <p className="eyebrow">Коммерческий директор · CCO · COO</p>
-          <h1><span>Алина</span><strong>Васильева</strong></h1>
-          <p className="hero-lead">Соединяю стратегию, маркетинг, продажи и процессы в управляемую коммерческую систему.</p>
-          <div className="hero-actions"><a href="#projects">Смотреть кейсы <b>↘</b></a><a href={`${base}alina-vasileva-resume.pdf`} download>Резюме PDF <b>↓</b></a></div>
-          <div className="hero-stat"><strong>12</strong><span>лет в управлении</span></div>
+          <h1 id="hero-title"><span>Алина</span><span>Васильева</span></h1>
+          <p className="hero-lead">
+            Строю коммерческие системы: соединяю стратегию, маркетинг, продажи и процессы в управляемую модель роста.
+          </p>
+          <div className="hero-actions">
+            <a className="button-link" href="#projects">Смотреть проекты <span>↓</span></a>
+            <a className="text-link" href={`${base}alina-vasileva-resume.pdf`} download>Резюме PDF <span>↓</span></a>
+          </div>
+          <dl className="hero-facts">
+            <div><dt>12+</dt><dd>лет в управлении</dd></div>
+            <div><dt>4</dt><dd>управленческих направления</dd></div>
+            <div><dt>СПб · Москва</dt><dd>проекты по России</dd></div>
+          </dl>
         </div>
-        <TrendGraph />
-        <div className="portrait-wrap"><img src={`${base}assets/alina-portrait.jpg`} alt="Алина Васильева" /></div>
+        <div className="hero-media" aria-hidden="true">
+          <HeroTrend />
+          <div className="portrait-wrap">
+            <img src={`${base}assets/alina-portrait.jpg`} alt="" />
+          </div>
+        </div>
       </section>
 
-      <section className="expertise" id="expertise">
-        {expertise.map(([title, text, icon]) => <article key={title}><div className={`expertise-icon ${icon}`}><i /><span /></div><h2>{title}</h2><p>{text}</p></article>)}
+      <section className="section intro" id="about">
+        <div className="section-heading">
+          <p>01 / Профиль</p>
+          <h2>Управление ростом на стыке коммерции, маркетинга и операционной системы.</h2>
+        </div>
+        <p className="wide-copy">
+          Работаю с собственниками и руководителями: определяю точки роста, собираю модель, выстраиваю команду и довожу изменения до измеримого результата.
+        </p>
       </section>
 
-      <section className="system-section">
-        <div className="section-copy"><p className="section-label">Бизнес-система</p><h2>Автоматизация процессов и прозрачная управленческая модель.</h2><p>Продажи, проекты, отчётность и инструменты управления собраны в едином контуре.</p></div>
-        <DashboardVisual />
+      <section className="section expertise" id="expertise">
+        <div className="section-heading">
+          <p>02 / Экспертиза</p>
+          <h2>Четыре управленческих контура</h2>
+        </div>
+        <div className="expertise-grid">
+          {expertise.map((item, index) => (
+            <article className="glass-card" key={item.title}>
+              <span className="item-number">0{index + 1}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
-      <section className="result-strip" aria-label="Бизнес-результаты">
-        <article><strong>×4,7</strong><span>оборот направления</span></article>
-        <article><strong>×8,3</strong><span>маржинальная прибыль</span></article>
-        <article><strong>40+ млн ₽</strong><span>коммерческих предложений</span></article>
-        <article><strong>8</strong><span>проектных запусков</span></article>
-      </section>
-
-      <section className="projects" id="projects">
-        <div className="section-heading"><p>Кейсы</p><h2>Факты и динамика.</h2></div>
+      <section className="section projects" id="projects">
+        <div className="section-heading">
+          <p>03 / Проекты</p>
+          <h2>Факты и растущие тренды</h2>
+        </div>
         <div className="project-list">
-          {cases.map((item) => <article key={item.number}>
-            <div className="project-copy"><p className="project-label">{item.number} · {item.label}</p><h3>{item.title}</h3><p>{item.text}</p><div className="case-facts">{item.facts.map(([value,label]) => <span key={value}><strong>{value}</strong><small>{label}</small></span>)}</div></div>
-            <CaseVisual type={item.visual} />
-          </article>)}
+          {cases.map((project) => (
+            <article className="case-panel" key={project.number}>
+              <div className="case-copy">
+                <p className="project-label">{project.number} · {project.label}</p>
+                <h3>{project.title}</h3>
+                <p className="case-description">{project.text}</p>
+                <div className={`metric-grid metric-grid-${project.facts.length}`}>
+                  {project.facts.map(([value, caption]) => (
+                    <div key={`${value}-${caption}`}>
+                      <strong>{value}</strong>
+                      <span>{caption}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="visual-shell">
+                <CaseVisual type={project.visual} />
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="experience" id="experience">
-        <div className="section-heading"><p>Опыт</p><h2>Управленческий трек</h2></div>
-        <div className="experience-list">{experience.map(([years, role, company, scope]) => <article key={years}><time>{years}</time><h3>{role}</h3><p>{company}</p><span>{scope}</span></article>)}</div>
+      <section className="section experience" id="experience">
+        <div className="section-heading">
+          <p>04 / Опыт</p>
+          <h2>Управленческий трек</h2>
+        </div>
+        <div className="experience-list">
+          {experience.map(([years, role, company, scope]) => (
+            <article key={`${years}-${company}`}>
+              <time>{years}</time>
+              <h3>{role}</h3>
+              <p className="company">{company}</p>
+              <p className="scope">{scope}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
-      <section className="education" id="education">
-        <div className="section-heading"><p>Обучение</p><h2>Актуальные инструменты управления</h2></div>
-        <div className="education-list">{education.map(([year,title,source]) => <article key={`${year}-${title}`}><time>{year}</time><h3>{title}</h3><p>{source}</p></article>)}</div>
+      <section className="section education" id="education">
+        <div className="section-heading">
+          <p>05 / Обучение</p>
+          <h2>Актуальные инструменты управления</h2>
+        </div>
+        <div className="education-list">
+          {education.map(([year, title, source]) => (
+            <article key={`${year}-${title}`}>
+              <time>{year}</time>
+              <h3>{title}</h3>
+              <p>{source}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="contact" id="contact">
-        <div><p className="section-label">Контакты</p><h2>Связаться</h2></div>
-        <div className="contact-list"><a href="tel:+79818885389"><span>Телефон</span><strong>+7 981 888 53 89</strong></a><a href="mailto:alinavasileva.jour@gmail.com"><span>Email</span><strong>alinavasileva.jour@gmail.com</strong></a><a href="https://t.me/AlinaVasileva" target="_blank" rel="noreferrer"><span>Telegram</span><strong>@AlinaVasileva</strong></a></div>
+        <p className="section-label">06 / Контакты</p>
+        <h2>Связаться</h2>
+        <div className="contact-list">
+          <a href="tel:+79818885389"><span>Телефон</span><strong>+7 981 888 53 89</strong><b>↗</b></a>
+          <a href="mailto:alinavasileva.jour@gmail.com"><span>Email</span><strong>alinavasileva.jour@gmail.com</strong><b>↗</b></a>
+          <a href="https://t.me/AlinaVasileva" target="_blank" rel="noreferrer"><span>Telegram</span><strong>@AlinaVasileva</strong><b>↗</b></a>
+        </div>
         <footer><span>Алина Васильева · 2026</span><a href="#top">Наверх ↑</a></footer>
       </section>
     </main>
