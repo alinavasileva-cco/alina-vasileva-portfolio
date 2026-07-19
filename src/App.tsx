@@ -4,24 +4,59 @@ const base = import.meta.env.BASE_URL;
 
 const expertise = [
   {
-    number: "01",
     title: "Коммерческая стратегия",
-    text: "Бизнес-модель, точки роста, экономика направления, план продаж и управленческий контур.",
+    text: "Бизнес-модель, экономика направления, план продаж и управленческий контур.",
+    visual: "loop",
   },
   {
-    number: "02",
     title: "Маркетинг и бренд",
-    text: "Позиционирование, продуктовая упаковка, коммуникационная стратегия и система привлечения спроса.",
+    text: "Позиционирование, продуктовая упаковка, контент и система привлечения спроса.",
+    visual: "ribbon",
   },
   {
-    number: "03",
     title: "Команда и процессы",
-    text: "Оргструктура, ответственность руководителей, мотивация, автоматизация и прозрачная отчётность.",
+    text: "Оргструктура, ответственность, мотивация, автоматизация и отчётность.",
+    visual: "beam",
   },
   {
-    number: "04",
     title: "Новые продукты",
-    text: "Исследование рынка, MVP, юнит-экономика, запуск и масштабирование нового бизнес-направления.",
+    text: "Исследование рынка, MVP, юнит-экономика, запуск и масштабирование.",
+    visual: "orb",
+  },
+];
+
+const projects = [
+  {
+    title: "Масштабирование направления",
+    label: "Операционное управление",
+    fact: "+71%",
+    caption: "рост выручки год к году",
+    text: "CRM, 1С, DataLens и AI объединены в единый управляемый контур.",
+    visual: "rise",
+  },
+  {
+    title: "Рост коммерческого результата",
+    label: "Продажи и пресейл",
+    fact: "×8,3",
+    caption: "рост маржинальной прибыли",
+    text: "Пересобраны пресейл, тендеры, коммерческие предложения и прогнозирование.",
+    visual: "steps",
+  },
+  {
+    title: "Рост интернет-магазина",
+    label: "Маркетинг / сайт / контент",
+    fact: "+16%",
+    caption: "конверсия сайта",
+    text: "Связка контента, сайта и заявки стала измеримой и управляемой.",
+    visual: "wave",
+  },
+  {
+    title: "Новый бизнес-юнит",
+    label: "Запуск продукта",
+    fact: "80%+",
+    caption: "маржинальность продукта",
+    text: "Продукт запущен с нуля и выведен на устойчивую экономику без рекламы.",
+    visual: "target",
   },
 ];
 
@@ -30,33 +65,6 @@ const experience = [
   ["2023 — 2025", "Исполнительный директор / COO", "Интерэстейт"],
   ["2019 — 2022", "Руководитель маркетинга и PR", "Сетевые коммуникации"],
   ["2016 — 2019", "Директор по развитию", "Альянс ТМ"],
-];
-
-const projects = [
-  {
-    title: "Масштабирование направления",
-    type: "Операционное управление",
-    result: "+71% выручки · 41 новый проект",
-    description: "CRM, 1С, DataLens и AI объединила в единый управляемый коммерческий контур.",
-  },
-  {
-    title: "Рост прибыли",
-    type: "Коммерческое управление",
-    result: "×4,7 оборот · ×8,3 прибыль",
-    description: "Пересобрала пресейл, тендеры, коммерческие предложения и прогнозирование сделок.",
-  },
-  {
-    title: "Рост интернет-магазина",
-    type: "Маркетинг / сайт / контент",
-    result: "×3 заявки · +16% конверсия",
-    description: "Перестроила путь от контента к заявке и ускорила производство материалов в пять раз.",
-  },
-  {
-    title: "Новый бизнес-юнит",
-    type: "Запуск продукта",
-    result: "80%+ маржинальность · 40 лидов",
-    description: "Запустила продукт с нуля и вывела его на устойчивую экономику без рекламных вложений.",
-  },
 ];
 
 const education = [
@@ -72,79 +80,70 @@ export default function App() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <main className="luxury-site" id="top">
+    <main className="trend-site" id="top">
       <header className="site-header">
-        <a className="monogram" href="#top" onClick={closeMenu} aria-label="На главную">A<span>/</span>B</a>
+        <a className="brand" href="#top" onClick={closeMenu}>АВ</a>
         <button
           className={menuOpen ? "menu-button is-open" : "menu-button"}
-          type="button"
           aria-label="Открыть меню"
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((value) => !value)}
         >
-          <span />
-          <span />
-          <span />
+          <span /><span />
         </button>
         <nav className={menuOpen ? "site-nav is-open" : "site-nav"}>
-          <a href="#about" onClick={closeMenu}>Обо мне</a>
           <a href="#expertise" onClick={closeMenu}>Экспертиза</a>
-          <a href="#experience" onClick={closeMenu}>Опыт</a>
           <a href="#projects" onClick={closeMenu}>Проекты</a>
+          <a href="#experience" onClick={closeMenu}>Опыт</a>
           <a href="#education" onClick={closeMenu}>Обучение</a>
           <a href="#contact" onClick={closeMenu}>Контакты</a>
         </nav>
       </header>
 
-      <section className="hero" aria-labelledby="hero-title">
+      <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">Стратегия · Рост · Системность</p>
-          <h1 id="hero-title"><span>Алина</span><span>Васильева</span></h1>
-          <p className="hero-role">Стратег по маркетингу<br />и развитию брендов</p>
-          <span className="hero-rule" aria-hidden="true" />
+          <p className="eyebrow">Коммерческий директор · CCO · COO</p>
+          <h1>Алина<br />Васильева</h1>
           <p className="hero-lead">
-            Помогаю компаниям расти системно — через сильную стратегию, продукт и маркетинг.
+            Строю коммерческие системы: соединяю стратегию, маркетинг, продажи и процессы в управляемую модель роста.
           </p>
           <div className="hero-actions">
-            <a className="primary-link" href="#projects">Смотреть проекты <span>↓</span></a>
-            <a className="secondary-link" href={`${base}alina-vasileva-resume.pdf`} download>
-              Резюме PDF <span>↓</span>
-            </a>
+            <a href="#projects">Смотреть проекты <span>↓</span></a>
+            <a href={`${base}alina-vasileva-resume.pdf`} download>Резюме PDF <span>↓</span></a>
           </div>
         </div>
-        <div className="portrait-wrap" aria-label="Портрет Алины Васильевой">
+        <div className="hero-trend" aria-hidden="true">
+          <i className="trend-line one" /><i className="trend-line two" /><i className="trend-line three" />
+          <b className="trend-node n1" /><b className="trend-node n2" /><b className="trend-node n3" />
+        </div>
+        <div className="portrait-wrap">
           <img src={`${base}assets/alina-portrait.jpg`} alt="Алина Васильева" />
         </div>
       </section>
 
-      <section className="results" aria-label="Ключевые бизнес-результаты">
+      <section className="facts" aria-label="Ключевые факты">
         <article><strong>12+</strong><span>лет в управлении</span></article>
-        <article><strong>41</strong><span>новый проект</span></article>
-        <article><strong>+71%</strong><span>рост выручки год к году</span></article>
+        <article><strong>41</strong><span>новый проект за год</span></article>
         <article><strong>40+ млн ₽</strong><span>коммерческих предложений</span></article>
+        <article><strong>600+</strong><span>проектов в клиентском портфеле</span></article>
       </section>
 
-      <section className="editorial-section about" id="about">
-        <div className="section-kicker"><span>01</span><p>Обо мне</p></div>
-        <div className="about-copy">
-          <h2>Помогаю собственникам и руководителям превращать амбициозные цели в работающую систему.</h2>
-          <p>
-            Соединяю коммерцию, маркетинг, продукт, аналитику и процессы. Работаю не как внешний
-            советчик со слайдами, а как партнёр, который помогает принять решение и довести его до результата.
-          </p>
+      <section className="section intro" id="about">
+        <p className="section-index">01 / Профиль</p>
+        <h2>Управление ростом на стыке коммерции, маркетинга и операционной системы.</h2>
+        <p className="wide-copy">Работаю с собственниками и руководителями: определяю точки роста, собираю модель, выстраиваю команду и довожу изменения до измеримого результата.</p>
+      </section>
+
+      <section className="section expertise" id="expertise">
+        <div className="section-head">
+          <p className="section-index">02 / Экспертиза</p>
+          <h2>Четыре управленческих контура</h2>
         </div>
-        <blockquote>
-          «Рост — это не удача. Это ясная стратегия, сильная команда и дисциплина исполнения».
-        </blockquote>
-      </section>
-
-      <section className="editorial-section expertise" id="expertise">
-        <div className="section-kicker"><span>02</span><p>Экспертиза</p></div>
-        <h2>Архитектура бизнеса, в которой каждый элемент работает на результат.</h2>
-        <div className="expertise-list">
-          {expertise.map((item) => (
-            <article key={item.number}>
-              <span>{item.number}</span>
+        <div className="expertise-grid">
+          {expertise.map((item, index) => (
+            <article key={item.title}>
+              <div className={`volume ${item.visual}`} aria-hidden="true"><span /></div>
+              <p className="item-number">0{index + 1}</p>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </article>
@@ -152,80 +151,63 @@ export default function App() {
         </div>
       </section>
 
-      <section className="editorial-section experience" id="experience">
-        <div className="section-kicker"><span>03</span><p>Опыт</p></div>
-        <h2>Управленческий трек</h2>
-        <div className="experience-list">
-          {experience.map(([years, role, company]) => (
-            <article key={`${years}-${company}`}>
-              <time>{years}</time>
-              <h3>{role}</h3>
-              <p>{company}</p>
-            </article>
-          ))}
+      <section className="section projects" id="projects">
+        <div className="section-head">
+          <p className="section-index">03 / Проекты</p>
+          <h2>Факты и растущие тренды</h2>
         </div>
-      </section>
-
-      <section className="editorial-section projects" id="projects">
-        <div className="section-kicker"><span>04</span><p>Выбранные проекты</p></div>
-        <h2>Результаты, которые можно измерить.</h2>
         <div className="project-list">
           {projects.map((project, index) => (
             <article key={project.title}>
-              <span className="project-number">0{index + 1}</span>
-              <p className="project-type">{project.type}</p>
-              <h3>{project.title}</h3>
-              <strong>{project.result}</strong>
-              <p>{project.description}</p>
+              <div className="project-copy">
+                <p className="project-label">0{index + 1} · {project.label}</p>
+                <h3>{project.title}</h3>
+                <p>{project.text}</p>
+                <div className="project-fact"><strong>{project.fact}</strong><span>{project.caption}</span></div>
+              </div>
+              <div className={`project-visual ${project.visual}`} aria-hidden="true">
+                <span className="shape-a" /><span className="shape-b" /><span className="shape-c" />
+              </div>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="editorial-section approach" id="approach">
-        <div className="section-kicker"><span>05</span><p>Подход</p></div>
-        <h2>Сначала экономика и приоритеты. Затем — команда, процессы и рост.</h2>
-        <ol>
-          <li><span>01</span><div><h3>Диагностика</h3><p>Цели, рынок, продукт, экономика и реальные ограничения бизнеса.</p></div></li>
-          <li><span>02</span><div><h3>Стратегия</h3><p>Несколько точных решений вместо длинного списка инициатив.</p></div></li>
-          <li><span>03</span><div><h3>Внедрение</h3><p>Ответственные, ритм управления, метрики и поддержка команды.</p></div></li>
-          <li><span>04</span><div><h3>Результат</h3><p>Проверяем влияние решений на выручку, прибыль и устойчивость.</p></div></li>
-        </ol>
+      <section className="section experience" id="experience">
+        <div className="section-head">
+          <p className="section-index">04 / Опыт</p>
+          <h2>Управленческий трек</h2>
+        </div>
+        <div className="experience-list">
+          {experience.map(([years, role, company]) => (
+            <article key={`${years}-${company}`}>
+              <time>{years}</time><h3>{role}</h3><p>{company}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
-      <section className="editorial-section references" id="testimonials">
-        <div className="section-kicker"><span>06</span><p>Рекомендации</p></div>
-        <h2>Отзывы и контакты руководителей предоставлю после знакомства.</h2>
-        <p>Так я сохраняю конфиденциальность партнёров и даю только релевантные референсы под вашу задачу.</p>
-      </section>
-
-      <section className="editorial-section education" id="education">
-        <div className="section-kicker"><span>07</span><p>Обучение</p></div>
-        <h2>Постоянно обновляю управленческие и аналитические инструменты.</h2>
+      <section className="section education" id="education">
+        <div className="section-head">
+          <p className="section-index">05 / Обучение</p>
+          <h2>Актуальные инструменты управления</h2>
+        </div>
         <div className="education-list">
           {education.map(([year, title, source]) => (
-            <article key={`${year}-${title}`}>
-              <time>{year}</time>
-              <h3>{title}</h3>
-              <p>{source}</p>
-            </article>
+            <article key={`${year}-${title}`}><time>{year}</time><h3>{title}</h3><p>{source}</p></article>
           ))}
         </div>
       </section>
 
       <section className="contact" id="contact">
-        <p className="contact-label">Контакты</p>
-        <h2>Обсудим ваш проект?</h2>
-        <p className="contact-intro">Напишите мне — отвечу лично и предложу следующий шаг.</p>
+        <p className="section-index">06 / Контакты</p>
+        <h2>Связаться</h2>
         <div className="contact-list">
           <a href="tel:+79818885389"><span>Телефон</span><strong>+7 981 888 53 89</strong><b>↗</b></a>
           <a href="mailto:alinavasileva.jour@gmail.com"><span>Email</span><strong>alinavasileva.jour@gmail.com</strong><b>↗</b></a>
           <a href="https://t.me/AlinaVasileva" target="_blank" rel="noreferrer"><span>Telegram</span><strong>@AlinaVasileva</strong><b>↗</b></a>
         </div>
-        <footer>
-          <span>Алина Васильева · 2026</span>
-          <a href="#top">Наверх ↑</a>
-        </footer>
+        <footer><span>Алина Васильева · 2026</span><a href="#top">Наверх ↑</a></footer>
       </section>
     </main>
   );
