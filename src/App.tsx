@@ -69,14 +69,12 @@ const education = [
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-
   const closeMenu = () => setMenuOpen(false);
 
   return (
     <main className="luxury-site" id="top">
       <header className="site-header">
-        <a className="monogram" href="#top" onClick={closeMenu} aria-label="На главную">AV</a>
-        <span className="header-signature">Алина Васильева</span>
+        <a className="monogram" href="#top" onClick={closeMenu} aria-label="На главную">A<span>/</span>B</a>
         <button
           className={menuOpen ? "menu-button is-open" : "menu-button"}
           type="button"
@@ -84,6 +82,7 @@ export default function App() {
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((value) => !value)}
         >
+          <span />
           <span />
           <span />
         </button>
@@ -99,14 +98,15 @@ export default function App() {
 
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <p className="eyebrow">Коммерческий директор · CCO · COO</p>
-          <h1 id="hero-title">Алина<br />Васильева</h1>
+          <p className="eyebrow">Стратегия · Рост · Системность</p>
+          <h1 id="hero-title"><span>Алина</span><span>Васильева</span></h1>
+          <p className="hero-role">Стратег по маркетингу<br />и развитию брендов</p>
+          <span className="hero-rule" aria-hidden="true" />
           <p className="hero-lead">
-            Строю коммерческие системы, которые превращают стратегию и маркетинг
-            в управляемый бизнес-результат.
+            Помогаю компаниям расти системно — через сильную стратегию, продукт и маркетинг.
           </p>
           <div className="hero-actions">
-            <a className="primary-link" href="#contact">Обсудить проект <span>→</span></a>
+            <a className="primary-link" href="#projects">Смотреть проекты <span>↓</span></a>
             <a className="secondary-link" href={`${base}alina-vasileva-resume.pdf`} download>
               Резюме PDF <span>↓</span>
             </a>
@@ -114,10 +114,6 @@ export default function App() {
         </div>
         <div className="portrait-wrap" aria-label="Портрет Алины Васильевой">
           <img src={`${base}assets/alina-portrait.jpg`} alt="Алина Васильева" />
-        </div>
-        <div className="hero-note">
-          <span>12+</span>
-          <p>лет в управлении<br />и развитии бизнеса</p>
         </div>
       </section>
 
