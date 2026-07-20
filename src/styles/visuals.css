@@ -1,0 +1,74 @@
+/* AUTOMATION */
+.auto-floor-glow { fill: rgba(25,191,220,.14); filter: blur(18px); }
+.auto-floor { fill: rgba(4,17,26,.86); stroke: rgba(53,183,211,.2); }
+.auto-floor-grid path { fill: none; stroke: rgba(58,178,203,.13); stroke-width: 1; }
+.auto-back-panel polygon { stroke: rgba(72,190,216,.22); stroke-width: 1; }
+.auto-back-panel polyline { fill: none; stroke: rgba(52,202,228,.5); stroke-width: 2; }
+.auto-back-panel rect { fill: rgba(25,173,201,.25); }
+.auto-back-panel circle { fill: none; stroke: rgba(55,190,216,.28); stroke-width: 8; }
+.auto-back-panel path { fill: none; stroke: #43d3e8; stroke-width: 6; stroke-linecap: round; }
+.auto-center-shadow { fill: rgba(0,0,0,.34); transform: translateY(14px); filter: blur(10px); }
+.auto-center-glass { stroke: rgba(81,214,236,.42); stroke-width: 1.2; }
+.auto-center-highlight { fill: none; stroke: rgba(176,247,255,.54); stroke-width: 1.1; }
+.auto-center-kicker { fill: #6f99a5; font-size: 11px; letter-spacing: .18em; }
+.auto-center-title { fill: #e0f5f7; font-size: 21px; letter-spacing: .08em; }
+.auto-mini-area { fill: rgba(31,198,226,.12); }
+.auto-mini-line { fill: none; stroke: #27cbe5; stroke-width: 2.5; filter: drop-shadow(0 0 6px rgba(34,203,229,.44)); }
+.auto-mini-chart circle { fill: #d9fbff; stroke: #24cae5; stroke-width: 2; }
+.auto-status circle { fill: #6fe7f6; }
+.auto-status text { fill: #74929c; font-size: 9px; letter-spacing: .12em; }
+.auto-core ellipse { fill: none; stroke: rgba(64,211,235,.48); stroke-width: 1.4; }
+.auto-core ellipse:first-child { fill: rgba(10,44,57,.5); }
+.auto-core circle { fill: #c8fbff; }
+.auto-links path { fill: none; stroke: rgba(41,199,226,.54); stroke-width: 1.5; stroke-dasharray: 7 8; animation: dash-flow 10s linear infinite; }
+.auto-node-base { fill: rgba(0,0,0,.4); filter: blur(5px); }
+.auto-node-box { stroke: rgba(75,211,233,.38); }
+.auto-node-edge { fill: none; stroke: rgba(130,239,250,.48); }
+.auto-node-dot { fill: #67e7f5; filter: drop-shadow(0 0 5px rgba(38,203,229,.75)); }
+.auto-nodes text { fill: #d6eef1; font-size: 16px; letter-spacing: .02em; }
+
+/* GROWTH */
+.growth-header text { fill: #77919a; font-size: 11px; letter-spacing: .15em; }
+.growth-header circle { fill: #55e0f0; filter: drop-shadow(0 0 5px rgba(32,197,225,.6)); }
+.chart-grid line { stroke: rgba(106,166,190,.13); stroke-width: 1; }
+.growth-bars rect { fill: rgba(24,148,176,.19); }
+.chart-line { fill: none; stroke-linecap: round; }
+.chart-line-secondary { stroke: rgba(73,143,169,.28); stroke-width: 1.6; }
+.chart-line-main { stroke-width: 3.5; stroke-dasharray: 1100; stroke-dashoffset: 1100; animation: line-draw 2.3s .15s ease forwards; }
+.chart-points circle { fill: #dcfbff; stroke: #20c8e4; stroke-width: 3; animation: node-pulse 3.1s ease-in-out infinite; }
+.growth-axis text { fill: #657f89; font-size: 10px; letter-spacing: .13em; }
+.growth-note path { fill: none; stroke: rgba(57,185,211,.4); stroke-width: 1; }
+.growth-note text { fill: #6cd7e7; font-size: 10px; letter-spacing: .12em; }
+
+/* FUNNEL */
+.funnel-grid line { stroke: rgba(106,166,190,.09); stroke-width: 1; }
+.funnel-caption { fill: #718b95; font-size: 10px; letter-spacing: .16em; }
+.funnel-stage-shadow { fill: rgba(0,0,0,.28); filter: blur(6px); }
+.funnel-stage-glass { stroke: rgba(72,197,219,.2); }
+.funnel-stage-edge { fill: none; stroke-width: 1.2; }
+.funnel-stage-reflection { stroke: rgba(210,250,255,.16); stroke-width: 1; }
+.funnel-stage text:not(.funnel-cohort) { fill: #e5f5f7; font-size: 17px; font-weight: 600; letter-spacing: .1em; }
+.funnel-cohort { fill: rgba(127,172,184,.44); font-size: 11px; letter-spacing: .12em; }
+.stage-1 { opacity: .72; }
+.stage-2 { opacity: .8; }
+.stage-3 { opacity: .9; }
+.stage-4 { opacity: 1; filter: drop-shadow(0 0 11px rgba(34,194,220,.12)); }
+.funnel-spine { fill: none; stroke: #4cd9ec; stroke-width: 2.2; stroke-dasharray: 5 10; animation: dash-flow 9s linear infinite; }
+.funnel-flow-points circle { fill: #d9fbff; stroke: #25cbe6; stroke-width: 2.5; animation: node-pulse 3s ease-in-out infinite; }
+.conversion-index text { fill: #718d96; font-size: 9px; letter-spacing: .12em; }
+.conversion-index path { fill: none; stroke: #78e7f4; stroke-width: 2; filter: drop-shadow(0 0 5px rgba(49,204,230,.36)); }
+.conversion-index circle { fill: #d9fbff; stroke: #25cbe6; stroke-width: 2; }
+.funnel-particles circle { fill: rgba(132,231,243,.4); animation: particle-pulse 2.6s ease-in-out infinite; }
+
+/* PIPELINE */
+.pipeline-layers polygon { fill: rgba(8,29,42,.34); stroke: rgba(65,175,200,.14); }
+.pipeline-layers polygon:nth-child(2) { opacity: .72; }
+.pipeline-layers polygon:nth-child(3) { opacity: .45; }
+.pipeline-grid path { fill: none; stroke: rgba(61,169,194,.11); stroke-width: 1; }
+.pipeline-line { fill: none; stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 1100; stroke-dashoffset: 1100; animation: line-draw 2.5s .18s ease forwards; }
+.milestone-halo { fill: rgba(20,150,179,.06); stroke: rgba(47,193,222,.24); }
+.milestone-core { fill: #d9fbff; stroke: #25cbe8; stroke-width: 3; animation: node-pulse 3.2s ease-in-out infinite; }
+.pipeline-milestones text { fill: #a7c4ca; font-size: 11px; font-weight: 500; letter-spacing: .08em; }
+.client-stream circle, .client-stream path { fill: none; stroke: rgba(121,207,225,.34); stroke-width: 1.3; }
+.pipeline-flow path { fill: none; stroke: rgba(67,182,207,.15); stroke-width: 1.2; }
+.pipeline-caption { fill: #718c96; font-size: 10px; letter-spacing: .15em; }
