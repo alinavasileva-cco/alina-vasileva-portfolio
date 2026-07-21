@@ -81,7 +81,7 @@ export default function App() {
           <div className="portrait-light" />
           <img
             className="hero-portrait hero-portrait-original"
-            src={`${base}assets/alina-portrait-transparent.png.png`}
+            src={`${base}assets/alina-portrait-transparent.png.png?v=176e6dd7`}
             alt=""
             width="1024"
             height="1536"
