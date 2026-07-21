@@ -90,6 +90,18 @@ export default function App() {
             fetchPriority="high"
           />
         </div>
+        <div className="hero-clients" id="clients">
+          <p className="hero-clients-label">Клиентский портфель</p>
+          <div className="client-marquee" tabIndex={0} aria-label="Клиентский портфель: бренды и компании">
+            <div className="client-marquee-track">
+              {[0, 1].map((copy) => (
+                <div className="client-marquee-group" aria-hidden={copy === 1} key={copy}>
+                  {clientPortfolio.map((client) => <span key={`${copy}-${client}`}>{client}</span>)}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="section expertise" id="expertise" data-reveal>
@@ -105,19 +117,6 @@ export default function App() {
               <p>{item.text}</p>
             </article>
           ))}
-        </div>
-      </section>
-
-      <section className="section clients" id="clients" data-reveal>
-        <p className="section-label client-label">Клиентский портфель</p>
-        <div className="client-marquee" tabIndex={0} aria-label="Клиентский портфель: бренды и компании">
-          <div className="client-marquee-track">
-            {[0, 1].map((copy) => (
-              <div className="client-marquee-group" aria-hidden={copy === 1} key={copy}>
-                {clientPortfolio.map((client) => <span key={`${copy}-${client}`}>{client}</span>)}
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
