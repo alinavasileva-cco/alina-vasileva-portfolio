@@ -1,4 +1,3 @@
-/* AUTOMATION */
 .auto-floor-glow { fill: rgba(25,191,220,.14); filter: blur(18px); }
 .auto-floor { fill: rgba(4,17,26,.86); stroke: rgba(53,183,211,.2); }
 .auto-floor-grid path { fill: none; stroke: rgba(58,178,203,.13); stroke-width: 1; }
@@ -10,8 +9,9 @@
 .auto-center-shadow { fill: rgba(0,0,0,.34); transform: translateY(14px); filter: blur(10px); }
 .auto-center-glass { stroke: rgba(81,214,236,.42); stroke-width: 1.2; }
 .auto-center-highlight { fill: none; stroke: rgba(176,247,255,.54); stroke-width: 1.1; }
-.auto-center-kicker { fill: #6f99a5; font-size: 11px; letter-spacing: .18em; }
-.auto-center-title { fill: #e0f5f7; font-size: 21px; letter-spacing: .08em; }
+.auto-center-kicker { fill: #6f99a5; font-size: 10px; letter-spacing: .18em; }
+.auto-center-title { fill: #e0f5f7; font-size: 19px; letter-spacing: .06em; }
+.auto-center-subtitle { fill: #78a4ae; font-size: 8px; letter-spacing: .08em; }
 .auto-mini-area { fill: rgba(31,198,226,.12); }
 .auto-mini-line { fill: none; stroke: #27cbe5; stroke-width: 2.5; filter: drop-shadow(0 0 6px rgba(34,203,229,.44)); }
 .auto-mini-chart circle { fill: #d9fbff; stroke: #24cae5; stroke-width: 2; }
@@ -27,7 +27,6 @@
 .auto-node-dot { fill: #67e7f5; filter: drop-shadow(0 0 5px rgba(38,203,229,.75)); }
 .auto-nodes text { fill: #d6eef1; font-size: 16px; letter-spacing: .02em; }
 
-/* GROWTH */
 .growth-header text { fill: #77919a; font-size: 11px; letter-spacing: .15em; }
 .growth-header circle { fill: #55e0f0; filter: drop-shadow(0 0 5px rgba(32,197,225,.6)); }
 .chart-grid line { stroke: rgba(106,166,190,.13); stroke-width: 1; }
@@ -40,35 +39,38 @@
 .growth-note path { fill: none; stroke: rgba(57,185,211,.4); stroke-width: 1; }
 .growth-note text { fill: #6cd7e7; font-size: 10px; letter-spacing: .12em; }
 
-/* FUNNEL */
 .funnel-grid line { stroke: rgba(106,166,190,.09); stroke-width: 1; }
-.funnel-caption { fill: #718b95; font-size: 10px; letter-spacing: .16em; }
+.funnel-stage { opacity: .7; transition: opacity .25s ease, filter .25s ease; }
+.funnel-stage-list:hover .funnel-stage { opacity: .42; }
+.funnel-stage-list .funnel-stage:hover { opacity: 1; filter: drop-shadow(0 0 14px rgba(34,194,220,.22)); }
 .funnel-stage-shadow { fill: rgba(0,0,0,.28); filter: blur(6px); }
 .funnel-stage-glass { stroke: rgba(72,197,219,.2); }
 .funnel-stage-edge { fill: none; stroke-width: 1.2; }
 .funnel-stage-reflection { stroke: rgba(210,250,255,.16); stroke-width: 1; }
-.funnel-stage text:not(.funnel-cohort) { fill: #e5f5f7; font-size: 17px; font-weight: 600; letter-spacing: .1em; }
-.funnel-cohort { fill: rgba(127,172,184,.44); font-size: 11px; letter-spacing: .12em; }
-.stage-1 { opacity: .72; }
-.stage-2 { opacity: .8; }
-.stage-3 { opacity: .9; }
-.stage-4 { opacity: 1; filter: drop-shadow(0 0 11px rgba(34,194,220,.12)); }
-.funnel-spine { fill: none; stroke: #4cd9ec; stroke-width: 2.2; stroke-dasharray: 5 10; animation: dash-flow 9s linear infinite; }
-.funnel-flow-points circle { fill: #d9fbff; stroke: #25cbe6; stroke-width: 2.5; animation: node-pulse 3s ease-in-out infinite; }
-.conversion-index text { fill: #718d96; font-size: 9px; letter-spacing: .12em; }
-.conversion-index path { fill: none; stroke: #78e7f4; stroke-width: 2; filter: drop-shadow(0 0 5px rgba(49,204,230,.36)); }
-.conversion-index circle { fill: #d9fbff; stroke: #25cbe6; stroke-width: 2; }
-.funnel-particles circle { fill: rgba(132,231,243,.4); animation: particle-pulse 2.6s ease-in-out infinite; }
+.funnel-stage text { fill: #e5f5f7; font-size: 17px; font-weight: 600; letter-spacing: .1em; }
+.stage-2 { opacity: .78; }
+.stage-3 { opacity: .88; }
+.stage-4 { opacity: 1; }
+.funnel-spine-static { fill: none; stroke: rgba(76,217,236,.42); stroke-width: 1.6; stroke-dasharray: 4 10; }
+.funnel-flow-points circle { fill: #d9fbff; stroke: #25cbe6; stroke-width: 2.5; }
 
-/* PIPELINE */
-.pipeline-layers polygon { fill: rgba(8,29,42,.34); stroke: rgba(65,175,200,.14); }
-.pipeline-layers polygon:nth-child(2) { opacity: .72; }
-.pipeline-layers polygon:nth-child(3) { opacity: .45; }
-.pipeline-grid path { fill: none; stroke: rgba(61,169,194,.11); stroke-width: 1; }
-.pipeline-line { fill: none; stroke-width: 3.5; stroke-linecap: round; stroke-dasharray: 1100; stroke-dashoffset: 1100; animation: line-draw 2.5s .18s ease forwards; }
-.milestone-halo { fill: rgba(20,150,179,.06); stroke: rgba(47,193,222,.24); }
-.milestone-core { fill: #d9fbff; stroke: #25cbe8; stroke-width: 3; animation: node-pulse 3.2s ease-in-out infinite; }
-.pipeline-milestones text { fill: #a7c4ca; font-size: 11px; font-weight: 500; letter-spacing: .08em; }
-.client-stream circle, .client-stream path { fill: none; stroke: rgba(121,207,225,.34); stroke-width: 1.3; }
-.pipeline-flow path { fill: none; stroke: rgba(67,182,207,.15); stroke-width: 1.2; }
-.pipeline-caption { fill: #718c96; font-size: 10px; letter-spacing: .15em; }
+.signal-grid line { stroke: rgba(106,166,190,.08); stroke-width: 1; }
+.signal-baseline { fill: none; stroke: url(#signalStroke); stroke-width: 3; stroke-linecap: round; filter: drop-shadow(0 0 7px rgba(34,203,229,.28)); }
+.signal-origin-halo { fill: rgba(20,150,179,.07); stroke: rgba(47,193,222,.24); }
+.signal-origin text,
+.signal-package text,
+.signal-network text,
+.signal-demand text,
+.signal-system text { fill: #9bbac2; font-size: 11px; letter-spacing: .08em; }
+.signal-package rect { fill: rgba(7,31,43,.74); stroke: rgba(70,203,225,.42); }
+.signal-package path { stroke: rgba(101,220,237,.55); stroke-width: 2; }
+.signal-package circle { fill: #78e7f4; }
+.signal-network > circle { fill: rgba(13,57,72,.09); stroke: rgba(55,192,216,.22); }
+.signal-network > circle:nth-child(2) { stroke-dasharray: 6 8; }
+.signal-network path { stroke: rgba(63,187,211,.32); stroke-width: 1.2; }
+.signal-network g circle { fill: #9ef0f8; stroke: #20bfd9; stroke-width: 2; }
+.signal-waves path { fill: none; stroke: rgba(51,205,229,.38); stroke-width: 2; }
+.signal-demand path { fill: none; stroke: rgba(105,229,242,.62); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.signal-system > circle { fill: rgba(11,50,64,.2); stroke: rgba(74,205,226,.36); }
+.signal-system > circle:nth-child(2) { stroke-dasharray: 5 7; }
+.signal-flow circle { fill: #bdf8fd; stroke: #22c5df; stroke-width: 2; animation: node-pulse 3s ease-in-out infinite; }
