@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "prepare:portrait": "node scripts/embed-portrait.mjs",
+    "predev": "npm run prepare:portrait",
     "dev": "vite",
+    "prebuild": "npm run prepare:portrait",
     "build": "tsc -b && vite build",
     "typecheck": "tsc -b --pretty false",
     "preview": "vite preview"
