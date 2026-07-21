@@ -91,17 +91,17 @@ export default function PipelineVisual() {
         ))}
       </g>
 
-      <path className="business-flow" d="M640 222 C662 236 674 250 688 272" />
-      <g className="business-unit" transform="translate(692 344)">
-        <rect x="-62" y="-78" width="124" height="156" rx="22" fill="url(#seminarGlass)" />
-        <rect className="business-unit-inner" x="-40" y="-52" width="80" height="62" rx="12" />
-        <circle cx="0" cy="-20" r="19" fill="url(#seminarCore)" filter="url(#seminarGlow)" />
-        <path d="M-34 30h68M-34 48h68" />
-        <text y="105" textAnchor="middle"><tspan x="0">НОВЫЙ</tspan><tspan x="0" dy="18">БИЗНЕС-ЮНИТ</tspan></text>
+      <path className="business-flow" d="M632 222 C650 238 660 254 670 276" />
+      <g className="business-unit" transform="translate(668 344)">
+        <rect x="-70" y="-84" width="140" height="168" rx="24" fill="url(#seminarGlass)" />
+        <rect className="business-unit-inner" x="-44" y="-56" width="88" height="66" rx="13" />
+        <circle cx="0" cy="-22" r="21" fill="url(#seminarCore)" filter="url(#seminarGlow)" />
+        <path d="M-38 32h76M-38 51h76" />
+        <text y="108" textAnchor="middle"><tspan x="0">НОВЫЙ</tspan><tspan x="0" dy="18">БИЗНЕС-ЮНИТ</tspan></text>
       </g>
 
       <g className="repeat-system">
-        <path className="repeat-loop" d="M710 438 C704 500 620 520 548 486 C512 470 486 446 470 412" />
+        <path className="repeat-loop" d="M706 438 C700 500 620 520 548 486 C512 470 486 446 470 412" />
         <path className="repeat-arrow" d="M466 412l3 23 21-10" />
       </g>
     </svg>
