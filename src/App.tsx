@@ -80,18 +80,14 @@ export default function App() {
           <HeroTrend />
           <div className="portrait-light" />
           <img
-            className="hero-portrait"
-            src={`${base}assets/alina-portrait-inline.svg`}
+            className="hero-portrait hero-portrait-original"
+            src={`${base}assets/alina-portrait.jpg`}
             alt=""
             width="640"
             height="640"
             loading="eager"
             decoding="async"
             fetchPriority="high"
-            onError={(event) => {
-              event.currentTarget.onerror = null;
-              event.currentTarget.src = `${base}assets/alina-portrait.jpg`;
-            }}
           />
         </div>
       </section>
