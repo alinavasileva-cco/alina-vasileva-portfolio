@@ -8,7 +8,6 @@ const base = import.meta.env.BASE_URL;
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [resumeLoading, setResumeLoading] = useState(false);
   const closeMenu = () => setMenuOpen(false);
 
   useEffect(() => {
@@ -37,27 +36,6 @@ export default function App() {
     elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, []);
-
-  const downloadResume = async () => {
-    if (resumeLoading) return;
-    setResumeLoading(true);
-    try {
-      const { resumePdfBase64 } = await import("./resumeData");
-      const binary = atob(resumePdfBase64);
-      const bytes = new Uint8Array(binary.length);
-      for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
-      const url = URL.createObjectURL(new Blob([bytes], { type: "application/pdf" }));
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "Alina_Vasileva_CCO_2026.pdf";
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(url);
-    } finally {
-      setResumeLoading(false);
-    }
-  };
 
   return (
     <main className="tech-site" id="top">
@@ -89,9 +67,7 @@ export default function App() {
           <p className="hero-profile">Работаю с собственниками и C-level — от диагностики и стратегии до внедрения изменений и измеримого эффекта.</p>
           <div className="hero-actions">
             <a className="button-link" href="#projects">Смотреть кейсы <span>↘</span></a>
-            <button className="text-link" type="button" onClick={downloadResume} disabled={resumeLoading}>
-              {resumeLoading ? "Подготовка…" : "Резюме PDF"} <span>↓</span>
-            </button>
+            <a className="text-link" href={`${base}alina-vasileva-resume.pdf`} download>Резюме PDF <span>↓</span></a>
           </div>
           <dl className="hero-facts">
             <div><dt>8+</dt><dd>лет в коммерции и управлении</dd></div>
