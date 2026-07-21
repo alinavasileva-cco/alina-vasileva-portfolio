@@ -33,6 +33,56 @@
 .hero-trend { opacity: .25; }
 .hero:hover .portrait-light { opacity: 1; }
 
+.hero-clients {
+  position: relative;
+  z-index: 8;
+  grid-column: 1 / -1;
+  align-self: end;
+  width: 100%;
+  margin-top: 2px;
+  padding: 0 var(--page-x) 18px;
+}
+
+.hero-clients-label {
+  width: min(100%, var(--content-max));
+  margin: 0 auto 7px;
+  color: #71838c;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.hero-clients .client-marquee {
+  width: min(100%, var(--content-max));
+  margin: 0 auto;
+  border-top: 1px solid rgba(116,169,191,.16);
+  border-bottom: 1px solid rgba(116,169,191,.16);
+}
+
+.hero-clients .client-marquee-track {
+  animation-duration: 86s;
+}
+
+.hero-clients .client-marquee-group {
+  min-height: 34px;
+  padding-right: 18px;
+}
+
+.hero-clients .client-marquee-group span {
+  padding: 0 14px;
+  color: #91a1a8;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .025em;
+}
+
+.hero-clients .client-marquee-group span::after {
+  right: -2px;
+  color: rgba(32,197,225,.36);
+}
+
 .case-automation .metric-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
 }
@@ -78,6 +128,24 @@
     bottom: -12%;
     width: 110%;
     height: 70%;
+  }
+
+  .hero-clients {
+    padding: 0 var(--page-x) 12px;
+  }
+
+  .hero-clients-label {
+    margin-bottom: 6px;
+    font-size: 8px;
+  }
+
+  .hero-clients .client-marquee-group {
+    min-height: 30px;
+  }
+
+  .hero-clients .client-marquee-group span {
+    padding: 0 11px;
+    font-size: 10px;
   }
 
   .case-automation .metric-owner {
