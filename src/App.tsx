@@ -78,9 +78,10 @@ export default function App() {
         </div>
         <div className="hero-media" aria-hidden="true">
           <HeroTrend />
+          <div className="portrait-light" />
           <img
             className="hero-portrait"
-            src={`${base}assets/alina-portrait.jpg`}
+            src={`${base}assets/alina-portrait-inline.svg`}
             alt=""
             width="640"
             height="640"
@@ -89,7 +90,7 @@ export default function App() {
             fetchPriority="high"
             onError={(event) => {
               event.currentTarget.onerror = null;
-              event.currentTarget.src = `${base}assets/alina-portrait-cutout.svg`;
+              event.currentTarget.src = `${base}assets/alina-portrait.jpg`;
             }}
           />
         </div>
@@ -145,11 +146,17 @@ export default function App() {
                 <h3>{project.title}</h3>
                 <p className="case-description">{project.text}</p>
                 <div className={`metric-grid metric-grid-${project.facts.length}`}>
-                  {project.facts.map(([value, caption]) => (
-                    <div className={value.length > 7 ? "metric-long" : undefined} key={`${value}-${caption}`}>
-                      <strong>{value}</strong><span>{caption}</span>
-                    </div>
-                  ))}
+                  {project.facts.map(([value, caption], factIndex) => {
+                    const classes = [
+                      value.length > 7 ? "metric-long" : "",
+                      project.visual === "automation" && factIndex === 2 ? "metric-owner" : "",
+                    ].filter(Boolean).join(" ");
+                    return (
+                      <div className={classes || undefined} key={`${value}-${caption}`}>
+                        <strong>{value}</strong><span>{caption}</span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <div className="visual-shell" aria-label={`Визуализация кейса ${index + 1}`}>
