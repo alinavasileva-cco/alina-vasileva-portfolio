@@ -5,6 +5,7 @@ import "./styles/base.css";
 import "./styles/sections.css";
 import "./styles/visuals.css";
 import "./styles/responsive.css";
+import "./styles/final-fixes.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
