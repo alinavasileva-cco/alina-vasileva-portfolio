@@ -48,27 +48,31 @@
 .funnel-stage-reflection { stroke: rgba(210,250,255,.2); stroke-width: 1; }
 .funnel-stage text { fill: #e5f5f7; font-size: 18px; font-weight: 600; letter-spacing: .11em; pointer-events: none; }
 
-.partner-grid line { stroke: rgba(106,166,190,.06); stroke-width: 1; }
-.partner-network-ring { fill: rgba(13,57,72,.08); stroke: rgba(55,192,216,.24); }
-.partner-network-ring.inner { stroke-dasharray: 6 8; }
-.partner-network path { stroke: rgba(63,187,211,.34); stroke-width: 1.25; }
-.partner-network g circle { fill: #a6f3fa; stroke: #20bfd9; stroke-width: 2; }
-.partner-network text,
-.partner-megaphone text,
-.lead-stream text,
-.business-unit text,
-.repeat-label { fill: #9bbac2; font-size: 11px; font-weight: 500; letter-spacing: .08em; }
-.megaphone-body { fill: rgba(7,31,43,.78); stroke: rgba(105,229,242,.64); stroke-width: 2; stroke-linejoin: round; }
-.megaphone-handle { fill: rgba(7,31,43,.72); stroke: rgba(105,229,242,.5); stroke-width: 2; }
-.megaphone-wave { fill: none; stroke: rgba(105,229,242,.5); stroke-width: 2; stroke-linecap: round; }
-.partner-flow-line { fill: none; stroke: url(#partnerStroke); stroke-width: 2.5; stroke-dasharray: 8 10; animation: dash-flow 8s linear infinite; }
-.lead-user circle,
-.lead-user path { fill: none; stroke: rgba(189,248,253,.72); stroke-width: 1.4; }
-.pipeline-visual:hover .lead-user { animation: lead-pulse 1.8s ease-in-out infinite; }
-.business-unit rect { fill: rgba(7,31,43,.78); stroke: rgba(74,205,226,.45); stroke-width: 1.4; }
-.business-unit path { fill: none; stroke: rgba(105,229,242,.52); stroke-width: 2; }
-.business-unit text { fill: #d9f6f8; font-size: 12px; }
+.ecosystem-grid line { stroke: rgba(106,166,190,.055); stroke-width: 1; }
+.ecosystem-ring { fill: rgba(10,46,61,.08); stroke: rgba(61,190,214,.25); stroke-width: 1.2; }
+.ecosystem-ring.inner { stroke-dasharray: 7 9; }
+.ecosystem-network path { fill: none; stroke: rgba(67,190,215,.34); stroke-width: 1.2; }
+.ecosystem-node-halo { fill: rgba(32,197,225,.06); stroke: rgba(81,215,235,.16); }
+.ecosystem-node { fill: #bff8fd; stroke: #22c5df; stroke-width: 2; filter: drop-shadow(0 0 6px rgba(34,197,223,.32)); }
+.system-shadow { fill: rgba(0,0,0,.3); transform: translateY(10px); filter: blur(9px); }
+.system-body { stroke: rgba(73,205,228,.34); stroke-width: 1.2; }
+.system-edge { fill: none; stroke: rgba(181,245,252,.42); stroke-width: 1.1; }
+.processing-core > circle:not(.processing-light) { fill: none; stroke: rgba(61,194,218,.24); stroke-width: 1.2; }
+.processing-core > circle:nth-of-type(2) { stroke-dasharray: 6 8; }
+.pipeline-rails path { fill: none; stroke: url(#ecosystemStroke); stroke-width: 1.8; stroke-linecap: round; opacity: .62; }
+.pipeline-particle { fill: #d1fbff; stroke: #20c5e1; stroke-width: 1.8; opacity: .74; transform-box: fill-box; transform-origin: center; filter: drop-shadow(0 0 6px rgba(32,197,225,.4)); }
+.pipeline-visual:hover .pipeline-particle { animation: pipeline-flow 1.9s ease-in-out infinite; }
+.business-unit rect { stroke: rgba(78,211,232,.42); stroke-width: 1.3; }
+.business-unit-inner { fill: rgba(10,45,59,.42); stroke: rgba(86,219,237,.22) !important; }
+.business-unit path { fill: none; stroke: rgba(106,229,242,.5); stroke-width: 2; }
+.business-unit text { fill: #d9f6f8; font-size: 12px; font-weight: 600; letter-spacing: .075em; }
+.client-expansion path { fill: none; stroke: rgba(78,211,232,.28); stroke-width: 1.5; stroke-linecap: round; transition: stroke .25s ease, filter .25s ease; }
+.pipeline-visual:hover .client-expansion path { stroke: rgba(119,232,245,.58); filter: drop-shadow(0 0 5px rgba(32,197,225,.35)); }
 .repeat-loop,
 .repeat-arrow { fill: none; stroke: rgba(74,205,226,.42); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
-@keyframes lead-pulse { 0%, 100% { opacity: .48; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.08); } }
+@keyframes pipeline-flow {
+  0% { opacity: .22; transform: translateX(-12px) scale(.72); }
+  48% { opacity: 1; transform: translateX(4px) scale(1.06); }
+  100% { opacity: .28; transform: translateX(22px) scale(.82); }
+}
