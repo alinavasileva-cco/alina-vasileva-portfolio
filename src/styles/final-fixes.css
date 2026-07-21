@@ -1,0 +1,140 @@
+.portrait-light {
+  position: absolute;
+  z-index: 2;
+  right: -4%;
+  bottom: -10%;
+  width: 76%;
+  height: 88%;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 60% 54%, rgba(30, 182, 211, .15) 0%, rgba(7, 44, 60, .08) 36%, transparent 72%);
+  filter: blur(30px);
+  animation: portrait-light-breathe 6.5s ease-in-out infinite;
+}
+
+.hero-media::after {
+  z-index: 5;
+  background:
+    linear-gradient(90deg, #02070d 0%, rgba(2,7,13,.96) 24%, rgba(2,7,13,.72) 39%, rgba(2,7,13,.22) 54%, transparent 69%),
+    linear-gradient(180deg, rgba(2,7,13,.22) 0%, transparent 20%, transparent 77%, rgba(2,7,13,.16) 88%, #02070d 100%);
+}
+
+.hero-portrait {
+  z-index: 4;
+  max-width: none;
+  height: auto;
+  object-fit: contain;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  filter: saturate(1.12) contrast(1.09) brightness(1.06) drop-shadow(0 30px 54px rgba(0,0,0,.36));
+  image-rendering: auto;
+  transform: translateZ(0);
+}
+
+.hero-trend { opacity: .25; }
+.hero:hover .portrait-light { opacity: 1; }
+
+.case-automation .metric-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.case-automation .metric-owner {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(150px, .72fr) minmax(0, 1.28fr);
+  gap: 18px;
+  align-items: end;
+  padding-bottom: 2px;
+}
+
+.case-automation .metric-owner strong {
+  max-width: 12ch;
+  font-size: clamp(25px, 2.2vw, 35px) !important;
+  line-height: 1.02;
+  white-space: normal !important;
+}
+
+.case-automation .metric-owner span {
+  max-width: 24ch;
+  margin: 0 0 2px;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+@media (max-width: 759px) {
+  .hero-media::after {
+    background:
+      linear-gradient(90deg, #02070d 0%, rgba(2,7,13,.9) 28%, rgba(2,7,13,.42) 53%, transparent 77%),
+      linear-gradient(180deg, rgba(2,7,13,.08) 0%, transparent 20%, transparent 74%, rgba(2,7,13,.14) 86%, #02070d 100%);
+  }
+
+  .hero-portrait {
+    right: -8vw !important;
+    bottom: -26px !important;
+    width: min(103vw, 474px) !important;
+  }
+
+  .portrait-light {
+    right: -22%;
+    bottom: -12%;
+    width: 110%;
+    height: 70%;
+  }
+
+  .case-automation .metric-owner {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .case-automation .metric-owner strong {
+    max-width: none;
+    font-size: clamp(24px, 7vw, 31px) !important;
+  }
+
+  .case-automation .metric-owner span { margin: 0; }
+}
+
+@media (min-width: 760px) {
+  .hero-portrait {
+    right: clamp(-28px, 1vw, 18px) !important;
+    bottom: -3.5% !important;
+    width: min(49vw, 720px) !important;
+  }
+
+  .portrait-light {
+    right: -1%;
+    bottom: -9%;
+    width: 70%;
+    height: 88%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .hero-portrait {
+    right: 2vw !important;
+    width: min(47vw, 760px) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portrait-light,
+  .auto-floor-glow,
+  .auto-back-panel,
+  .auto-center-panel,
+  .auto-mini-line,
+  .auto-core,
+  .auto-nodes > g,
+  .audience-person,
+  .seminar-signal,
+  .network-ring.inner,
+  .network-node,
+  .business-unit,
+  .repeat-loop,
+  .repeat-arrow {
+    animation: none !important;
+  }
+}
+
+@keyframes portrait-light-breathe {
+  0%, 100% { opacity: .66; transform: scale(.97); }
+  50% { opacity: .96; transform: scale(1.025); }
+}
