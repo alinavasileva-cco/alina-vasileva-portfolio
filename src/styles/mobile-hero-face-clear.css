@@ -1,0 +1,8 @@
+/* Mobile-only hero adjustment: keep all copy clear of the face. */
+@media (max-width: 759px) {
+  .hero-portrait {
+    right: -18vw !important;
+    bottom: -155px !important;
+    width: min(92vw, 430px) !important;
+  }
+}
