@@ -189,6 +189,7 @@ export default function App() {
           <div className="education-heading">
             <p className="section-label">Образование</p>
             <h2>Образование и курсы повышения квалификации</h2>
+            <p className="education-degree">Высшее образование · журналист — СПбГУП</p>
             <p>Системное управление, маркетинг, аналитика, автоматизация и развитие команд.</p>
           </div>
           <div className="education-list">
