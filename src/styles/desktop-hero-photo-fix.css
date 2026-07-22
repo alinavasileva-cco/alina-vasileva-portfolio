@@ -1,14 +1,25 @@
-/* Desktop-only hero polish: show the full face and give the client label breathing room. */
+/* Desktop-only hero: keep the approved portrait composition and never crop the face. */
 @media (min-width: 760px) {
+  .hero-media {
+    overflow: hidden;
+  }
+
   .hero-portrait {
+    top: clamp(6px, 1.2vh, 14px) !important;
     right: clamp(6px, 2.2vw, 42px) !important;
-    bottom: -1.5% !important;
+    bottom: auto !important;
     width: min(44vw, 680px) !important;
+    max-width: none !important;
+    max-height: none !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: right top !important;
   }
 
   .portrait-light {
+    top: 4% !important;
     right: 1% !important;
-    bottom: -7% !important;
+    bottom: auto !important;
     width: 66% !important;
     height: 84% !important;
   }
@@ -20,5 +31,15 @@
   .hero-clients-label {
     margin-bottom: 11px !important;
     padding-left: calc(var(--page-x) + 8px) !important;
+  }
+}
+
+/* Browser zoom reduces the CSS viewport. Keep the portrait large enough,
+   but anchored from the top so the forehead, eyes and smile stay visible. */
+@media (min-width: 760px) and (max-width: 1180px) {
+  .hero-portrait {
+    top: 4px !important;
+    right: -1vw !important;
+    width: clamp(420px, 44vw, 560px) !important;
   }
 }
