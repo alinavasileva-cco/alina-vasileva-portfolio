@@ -10,10 +10,9 @@
 /* Desktop hero only. Mobile remains untouched. */
 @media (min-width: 760px) {
   .hero {
-    --hero-client-strip-h: 58px;
     min-height: clamp(670px, calc(100svh - var(--header-h)), 860px) !important;
     grid-template-rows: minmax(0, 1fr) !important;
-    padding-bottom: var(--hero-client-strip-h) !important;
+    padding-bottom: 0 !important;
   }
 
   .hero-copy {
@@ -58,69 +57,6 @@
     width: 66% !important;
     height: 88% !important;
   }
-
-  .hero-clients {
-    position: absolute !important;
-    z-index: 9;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    width: 100% !important;
-    margin: 0 !important;
-    margin-left: 0 !important;
-    padding: 8px 0 6px !important;
-    border-top: 1px solid rgba(116, 169, 191, .17);
-    background: rgba(2, 7, 13, .78);
-    backdrop-filter: blur(8px);
-  }
-
-  .hero-clients-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 0 0 5px !important;
-    padding: 0 var(--page-x) !important;
-    color: #d3dde0 !important;
-    font-size: 8px !important;
-    font-weight: 650;
-    line-height: 1.2;
-    letter-spacing: .14em;
-  }
-
-  .hero-clients-label::before {
-    content: "";
-    flex: 0 0 auto;
-    width: 2px;
-    height: 12px;
-    background: var(--cyan);
-  }
-
-  .hero-clients .client-marquee {
-    width: 100% !important;
-    overflow: hidden !important;
-    border-top: 0 !important;
-    border-bottom: 0 !important;
-    cursor: default !important;
-    scrollbar-width: none;
-  }
-
-  .hero-clients .client-marquee::-webkit-scrollbar { display: none; }
-
-  .hero-clients .client-marquee-track {
-    width: max-content;
-    flex-wrap: nowrap;
-  }
-
-  .hero-clients .client-marquee-group {
-    min-height: 22px !important;
-    flex-wrap: nowrap;
-    white-space: nowrap;
-  }
-
-  .hero-clients .client-marquee-group span {
-    padding: 0 9px !important;
-    font-size: 9px !important;
-  }
 }
 
 @media (min-width: 760px) and (max-height: 800px) {
@@ -147,14 +83,6 @@
     right: clamp(-4px, 1vw, 18px) !important;
     width: clamp(560px, 43vw, 650px) !important;
   }
-
-  .hero-clients {
-    padding-top: 6px !important;
-    padding-bottom: 4px !important;
-  }
-
-  .hero-clients-label { margin-bottom: 3px !important; }
-  .hero-clients .client-marquee-group { min-height: 20px !important; }
 }
 
 @media (min-width: 760px) and (max-width: 1180px) {
