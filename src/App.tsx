@@ -62,7 +62,7 @@ export default function App() {
 
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-copy">
-          <p className="eyebrow">Коммерческий директор / CCO · Head of Business Development</p>
+          <p className="eyebrow">Бизнес-трекер · Коммерческий директор / CCO · Head of Business Development</p>
           <h1 id="hero-title"><span>Алина</span><span>Васильева</span></h1>
           <p className="hero-lead">Строю коммерческие системы и точки роста: соединяю продажи, маркетинг, процессы, аналитику и команду в управляемую модель результата.</p>
           <p className="hero-profile">Работаю с собственниками и C-level — от диагностики и стратегии до внедрения изменений и измеримого эффекта.</p>
