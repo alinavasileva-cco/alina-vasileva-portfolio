@@ -1,4 +1,4 @@
-/* Approved PNG case visuals: no card, no frame, softly dissolved into the site background. */
+/* Approved PNG case visuals: no card, no frame, dissolved into the landing background. */
 .case-panel .visual-shell {
   position: relative;
   width: 100%;
@@ -9,26 +9,16 @@
   overflow: hidden !important;
   border: 0 !important;
   border-radius: 0 !important;
-  background: #02070d !important;
+  background: transparent !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
   isolation: isolate;
 }
 
-.case-panel .visual-shell::before {
+.case-panel .visual-shell::before,
+.case-panel .visual-shell::after {
   display: none !important;
   content: none !important;
-}
-
-.case-panel .visual-shell::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  z-index: 2;
-  pointer-events: none;
-  background:
-    linear-gradient(90deg, #02070d 0%, transparent 10%, transparent 90%, #02070d 100%),
-    linear-gradient(180deg, #02070d 0%, transparent 10%, transparent 90%, #02070d 100%);
 }
 
 .case-visual-image {
@@ -42,35 +32,29 @@
   object-position: center;
   border: 0;
   border-radius: 0;
-  background: #02070d;
+  background: transparent !important;
   box-shadow: none;
   transform-origin: center;
+  mix-blend-mode: lighten;
   animation: case-image-glow 7s ease-in-out infinite;
-  -webkit-mask-image: radial-gradient(
-    ellipse 98% 98% at 50% 50%,
-    #000 0%,
-    #000 80%,
-    rgba(0, 0, 0, .92) 88%,
-    rgba(0, 0, 0, .48) 95%,
-    transparent 100%
-  );
-  mask-image: radial-gradient(
-    ellipse 98% 98% at 50% 50%,
-    #000 0%,
-    #000 80%,
-    rgba(0, 0, 0, .92) 88%,
-    rgba(0, 0, 0, .48) 95%,
-    transparent 100%
-  );
+
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, rgba(0,0,0,.32) 3%, #000 9%, #000 91%, rgba(0,0,0,.32) 97%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.32) 3%, #000 9%, #000 91%, rgba(0,0,0,.32) 97%, transparent 100%);
+  -webkit-mask-composite: source-in;
+
+  mask-image:
+    linear-gradient(to right, transparent 0%, rgba(0,0,0,.32) 3%, #000 9%, #000 91%, rgba(0,0,0,.32) 97%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.32) 3%, #000 9%, #000 91%, rgba(0,0,0,.32) 97%, transparent 100%);
+  mask-composite: intersect;
 }
 
-/* Individual optical scales for equal perceived size. */
-.case-growth .case-visual-image { transform: scale(1.035); }
-.case-automation .case-visual-image { transform: scale(1.025); }
-.case-funnel .case-visual-image { transform: scale(1.02); }
-.case-pipeline .case-visual-image { transform: scale(1.035); }
+/* Individual optical scales: enough to move the original rounded PNG edge outside the visible field. */
+.case-growth .case-visual-image { transform: scale(1.085); }
+.case-automation .case-visual-image { transform: scale(1.075); }
+.case-funnel .case-visual-image { transform: scale(1.07); }
+.case-pipeline .case-visual-image { transform: scale(1.085); }
 
-/* Keep every case balanced: equal text and image columns and consistent visual size. */
 @media (min-width: 860px) {
   .case-panel {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -116,10 +100,10 @@
 
 @keyframes case-image-glow {
   0%, 100% {
-    filter: brightness(.985) saturate(.99) drop-shadow(0 0 3px rgba(32, 197, 225, .04));
+    filter: brightness(.99) saturate(.99) drop-shadow(0 0 2px rgba(32, 197, 225, .025));
   }
   50% {
-    filter: brightness(1.015) saturate(1) drop-shadow(0 0 9px rgba(32, 197, 225, .09));
+    filter: brightness(1.01) saturate(1) drop-shadow(0 0 7px rgba(32, 197, 225, .065));
   }
 }
 
