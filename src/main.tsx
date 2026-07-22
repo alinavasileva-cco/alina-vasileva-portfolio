@@ -10,6 +10,7 @@ import "./styles/experience-timeline.css";
 import "./styles/mobile-hero-face-clear.css";
 import "./styles/desktop-hero-photo-fix.css";
 import "./styles/case-images.css";
+import "./styles/expertise-clients.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
