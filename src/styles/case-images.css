@@ -36,111 +36,158 @@
   box-shadow: none;
   transform-origin: center;
   mix-blend-mode: lighten;
-  animation: case-image-glow 7s ease-in-out infinite;
+  opacity: .95;
+  animation: case-image-glow 5.4s ease-in-out infinite;
 
   -webkit-mask-image:
     linear-gradient(to right,
       transparent 0%,
-      rgba(0,0,0,.16) 3%,
-      rgba(0,0,0,.68) 8%,
-      #000 13%,
-      #000 87%,
-      rgba(0,0,0,.68) 92%,
-      rgba(0,0,0,.16) 97%,
+      rgba(0,0,0,.12) 4%,
+      rgba(0,0,0,.58) 10%,
+      #000 16%,
+      #000 84%,
+      rgba(0,0,0,.58) 90%,
+      rgba(0,0,0,.12) 96%,
       transparent 100%),
     linear-gradient(to bottom,
       transparent 0%,
-      rgba(0,0,0,.16) 3%,
-      rgba(0,0,0,.68) 8%,
-      #000 13%,
-      #000 87%,
-      rgba(0,0,0,.68) 92%,
-      rgba(0,0,0,.16) 97%,
+      rgba(0,0,0,.12) 4%,
+      rgba(0,0,0,.58) 10%,
+      #000 16%,
+      #000 88%,
+      rgba(0,0,0,.58) 94%,
       transparent 100%);
   -webkit-mask-composite: source-in;
 
   mask-image:
     linear-gradient(to right,
       transparent 0%,
-      rgba(0,0,0,.16) 3%,
-      rgba(0,0,0,.68) 8%,
-      #000 13%,
-      #000 87%,
-      rgba(0,0,0,.68) 92%,
-      rgba(0,0,0,.16) 97%,
+      rgba(0,0,0,.12) 4%,
+      rgba(0,0,0,.58) 10%,
+      #000 16%,
+      #000 84%,
+      rgba(0,0,0,.58) 90%,
+      rgba(0,0,0,.12) 96%,
       transparent 100%),
     linear-gradient(to bottom,
       transparent 0%,
-      rgba(0,0,0,.16) 3%,
-      rgba(0,0,0,.68) 8%,
-      #000 13%,
-      #000 87%,
-      rgba(0,0,0,.68) 92%,
-      rgba(0,0,0,.16) 97%,
+      rgba(0,0,0,.12) 4%,
+      rgba(0,0,0,.58) 10%,
+      #000 16%,
+      #000 88%,
+      rgba(0,0,0,.58) 94%,
       transparent 100%);
   mask-composite: intersect;
 }
 
-/* First case has the most visible original PNG edge, so dissolve it a little deeper. */
+/* The first two originals contain the most visible rounded dark frame.
+   Crop only the outer pixels and dissolve them more deeply without touching the core graphic. */
 .case-growth .case-visual-image {
-  transform: scale(1.12);
+  transform: scale(1.16);
+  clip-path: inset(3.5%);
   -webkit-mask-image:
     linear-gradient(to right,
       transparent 0%,
-      rgba(0,0,0,.1) 4%,
-      rgba(0,0,0,.56) 10%,
-      #000 17%,
-      #000 83%,
-      rgba(0,0,0,.56) 90%,
-      rgba(0,0,0,.1) 96%,
+      rgba(0,0,0,.06) 6%,
+      rgba(0,0,0,.42) 13%,
+      #000 22%,
+      #000 78%,
+      rgba(0,0,0,.42) 87%,
+      rgba(0,0,0,.06) 94%,
       transparent 100%),
     linear-gradient(to bottom,
       transparent 0%,
-      rgba(0,0,0,.1) 4%,
-      rgba(0,0,0,.56) 10%,
-      #000 17%,
-      #000 83%,
-      rgba(0,0,0,.56) 90%,
-      rgba(0,0,0,.1) 96%,
+      rgba(0,0,0,.05) 7%,
+      rgba(0,0,0,.46) 15%,
+      #000 24%,
+      #000 87%,
+      rgba(0,0,0,.5) 94%,
       transparent 100%);
   -webkit-mask-composite: source-in;
-
   mask-image:
     linear-gradient(to right,
       transparent 0%,
-      rgba(0,0,0,.1) 4%,
-      rgba(0,0,0,.56) 10%,
-      #000 17%,
-      #000 83%,
-      rgba(0,0,0,.56) 90%,
-      rgba(0,0,0,.1) 96%,
+      rgba(0,0,0,.06) 6%,
+      rgba(0,0,0,.42) 13%,
+      #000 22%,
+      #000 78%,
+      rgba(0,0,0,.42) 87%,
+      rgba(0,0,0,.06) 94%,
       transparent 100%),
     linear-gradient(to bottom,
       transparent 0%,
-      rgba(0,0,0,.1) 4%,
-      rgba(0,0,0,.56) 10%,
-      #000 17%,
-      #000 83%,
-      rgba(0,0,0,.56) 90%,
-      rgba(0,0,0,.1) 96%,
+      rgba(0,0,0,.05) 7%,
+      rgba(0,0,0,.46) 15%,
+      #000 24%,
+      #000 87%,
+      rgba(0,0,0,.5) 94%,
       transparent 100%);
   mask-composite: intersect;
 }
 
-/* Individual optical scales for the remaining approved PNGs. */
-.case-automation .case-visual-image { transform: scale(1.09); }
-.case-funnel .case-visual-image { transform: scale(1.085); }
-.case-pipeline .case-visual-image { transform: scale(1.095); }
+.case-automation .case-visual-image {
+  transform: scale(1.13);
+  clip-path: inset(3.2%);
+  animation-delay: -1.35s;
+  -webkit-mask-image:
+    linear-gradient(to right,
+      transparent 0%,
+      rgba(0,0,0,.08) 5%,
+      rgba(0,0,0,.48) 12%,
+      #000 20%,
+      #000 80%,
+      rgba(0,0,0,.48) 88%,
+      rgba(0,0,0,.08) 95%,
+      transparent 100%),
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(0,0,0,.06) 6%,
+      rgba(0,0,0,.5) 14%,
+      #000 22%,
+      #000 89%,
+      rgba(0,0,0,.5) 96%,
+      transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right,
+      transparent 0%,
+      rgba(0,0,0,.08) 5%,
+      rgba(0,0,0,.48) 12%,
+      #000 20%,
+      #000 80%,
+      rgba(0,0,0,.48) 88%,
+      rgba(0,0,0,.08) 95%,
+      transparent 100%),
+    linear-gradient(to bottom,
+      transparent 0%,
+      rgba(0,0,0,.06) 6%,
+      rgba(0,0,0,.5) 14%,
+      #000 22%,
+      #000 89%,
+      rgba(0,0,0,.5) 96%,
+      transparent 100%);
+  mask-composite: intersect;
+}
+
+.case-funnel .case-visual-image {
+  transform: scale(1.09);
+  animation-delay: -2.7s;
+}
+
+.case-pipeline .case-visual-image {
+  transform: scale(1.1);
+  animation-delay: -4.05s;
+}
 
 @media (min-width: 860px) {
   .case-panel {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: clamp(44px, 5vw, 76px) !important;
+    gap: clamp(38px, 4.4vw, 68px) !important;
     align-items: center !important;
   }
 
   .case-panel .visual-shell {
-    width: min(100%, 610px);
+    width: min(100%, 600px);
     justify-self: center;
     margin-top: 0 !important;
   }
@@ -148,11 +195,11 @@
   .case-copy {
     width: 100%;
     max-width: 560px !important;
-    min-height: min(43vw, 610px);
+    min-height: min(39vw, 560px);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding-block: clamp(14px, 2vw, 30px);
+    padding-block: clamp(12px, 1.6vw, 24px);
   }
 
   .case-panel:nth-child(odd) .case-copy { justify-self: start; }
@@ -177,15 +224,24 @@
 
 @keyframes case-image-glow {
   0%, 100% {
-    filter: brightness(.99) saturate(.99) drop-shadow(0 0 2px rgba(32, 197, 225, .025));
+    opacity: .92;
+    filter:
+      brightness(.95)
+      saturate(.95)
+      drop-shadow(0 0 3px rgba(32, 197, 225, .045));
   }
   50% {
-    filter: brightness(1.01) saturate(1) drop-shadow(0 0 7px rgba(32, 197, 225, .065));
+    opacity: 1;
+    filter:
+      brightness(1.065)
+      saturate(1.055)
+      drop-shadow(0 0 17px rgba(32, 197, 225, .16));
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .case-visual-image {
+    opacity: 1;
     animation: none !important;
   }
 }
